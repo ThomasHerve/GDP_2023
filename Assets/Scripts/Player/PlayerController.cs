@@ -139,4 +139,10 @@ public class PlayerController : MonoBehaviour
     }
 
     
+    // XP
+    public void GetXP(int value)
+    {
+        Debug.Log("get xp");
+    }
+
 }

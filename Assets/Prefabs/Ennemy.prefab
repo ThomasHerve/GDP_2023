@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5179530971709800297
 Transform:
   m_ObjectHideFlags: 0
@@ -131,6 +131,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 0
   damage: 10
+  numberXP: 5
+  valueXP: 1
   damageTime: 1
 --- !u!195 &626075200072695261
 NavMeshAgent:

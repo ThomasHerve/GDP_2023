@@ -12,6 +12,11 @@ public class Ennemy : MonoBehaviour
     [SerializeField]
     private int damage;
 
+    [SerializeField]
+    private int numberXP;
+    [SerializeField]
+    private int valueXP;
+
     private NavMeshAgent navMeshAgent;
     private GameObject player;
     private PlayerController playerController;
