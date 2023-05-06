@@ -16,6 +16,8 @@ public class Ennemy : MonoBehaviour
     private int numberXP;
     [SerializeField]
     private int valueXP;
+    [SerializeField]
+    private GameObject particles;
 
     private NavMeshAgent navMeshAgent;
     private GameObject player;
@@ -88,6 +90,7 @@ public class Ennemy : MonoBehaviour
     public void Die()
     {
         GetComponent<Animation>().Play("SimpleDeath");
+        Instantiate(particles, transform.position, Quaternion.identity);
         Destroy(gameObject,2);
     }
 
