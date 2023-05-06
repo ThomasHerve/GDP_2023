@@ -7,7 +7,7 @@ public class Ennemy : MonoBehaviour
 {
     [Header("Parametres")]
     [SerializeField]
-    private int hp;
+    private int hp = 20;
     
     [SerializeField]
     private int damage;
@@ -46,7 +46,6 @@ public class Ennemy : MonoBehaviour
         if(!frozen)
             navMeshAgent.destination = player.transform.position;
 
-
         if(currentOutTime > 0)
         {
             currentOutTime-=Time.deltaTime;
@@ -71,6 +70,7 @@ public class Ennemy : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Player")
         {
             isCollided = true;
@@ -87,14 +87,20 @@ public class Ennemy : MonoBehaviour
 
     public void Die()
     {
-        //Die animation
-
-        Destroy(gameObject);
+        GetComponent<Animation>().Play("SimpleDeath");
+        Destroy(gameObject,2);
     }
 
     public void Freeze()
     {
         navMeshAgent.destination = transform.position;
         frozen = true;
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        hp -= dmg;
+        if (hp < 0)
+            Die();
     }
 }

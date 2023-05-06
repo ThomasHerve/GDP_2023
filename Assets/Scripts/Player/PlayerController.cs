@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
     {
         if(PlayerStats.hp > 0)
         {
-            PlayerStats.hp -= damages;
+            PlayerStats.TakeDamage(damages);
             if (PlayerStats.hp <= 0)
             {
                 gameLoop.EndGame();
@@ -137,7 +137,6 @@ public class PlayerController : MonoBehaviour
         }
         Instantiate(deathParticleEffect, transform.position, Quaternion.identity);
     }
-
     
     // XP
     public void GetXP(int value)
@@ -145,4 +144,9 @@ public class PlayerController : MonoBehaviour
         Debug.Log("get xp");
     }
 
+
+    public void Hit()
+    {
+        transform.Find("Whip").GetComponent<Animation>().Play();
+    }
 }

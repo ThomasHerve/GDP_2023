@@ -5,10 +5,14 @@ using UnityEngine;
 public class GameLoop : MonoBehaviour
 {
     PlayerController player;
+    const float SPAWNTIME = 1;
+    public float lastSpawn = SPAWNTIME;
+    
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        GetComponent<WaveManager>().SpawnWave();
     }
 
     State state = State.WAITING_TO_START;
@@ -30,6 +34,15 @@ public class GameLoop : MonoBehaviour
                 break;
             case State.RUNNING:
                 // Game logic over time
+
+                // doute sur le delta
+
+                lastSpawn -= Time.deltaTime;
+                if (lastSpawn <= 0)
+                {
+                    GetComponent<WaveManager>().SpawnWave();
+                    lastSpawn = SPAWNTIME;
+                }
                 break;
             case State.END:
                 // Manage end of the game
