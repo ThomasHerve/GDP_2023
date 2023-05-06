@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -31,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private GameLoop gameLoop;
 
     private float startYPosition;
+
 
     // Start is called before the first frame update
     void Start()
@@ -138,4 +138,5 @@ public class PlayerController : MonoBehaviour
         Instantiate(deathParticleEffect, transform.position, Quaternion.identity);
     }
 
+    
 }
