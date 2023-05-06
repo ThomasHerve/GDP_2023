@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 626075200072695255}
   - component: {fileID: 626075200072695260}
   - component: {fileID: 626075200072695261}
+  - component: {fileID: 1524578494}
   m_Layer: 6
   m_Name: Ennemy
   m_TagString: Enemy
@@ -129,8 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857d9621803d1b54486c940c3e0ea4e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
-  damage: 10
+  hp: 20
+  damage: 4
   damageTime: 1
 --- !u!195 &626075200072695261
 NavMeshAgent:
@@ -154,3 +155,19 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!111 &1524578494
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6869507943456372070}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 8fe5b6a4883d7d24f98b2c8bfd52a30e, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 8fe5b6a4883d7d24f98b2c8bfd52a30e, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
