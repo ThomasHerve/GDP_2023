@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -9,6 +10,9 @@ public class PlayerController : MonoBehaviour
     float speed;
     [SerializeField]
     float acceleration;
+
+    [SerializeField]
+    UnityEvent end;
 
     // Velocity management
     private Vector3 targetVelocity;
@@ -86,5 +90,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
+    public void TakeDamages(int damages)
+    {
+        //TODO
+        Debug.Log("JE SUIS COLLISION");
+    }
+
 }
