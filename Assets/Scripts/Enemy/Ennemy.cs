@@ -41,7 +41,6 @@ public class Ennemy : MonoBehaviour
         if(!frozen)
             navMeshAgent.destination = player.transform.position;
 
-
         if(currentOutTime > 0)
         {
             currentOutTime-=Time.deltaTime;
