@@ -284,6 +284,7 @@ MonoBehaviour:
   speed: 8
   acceleration: 10
   deathAnimationTime: 0.6
+  deathParticleEffect: {fileID: 6127671011331895442, guid: b0e1468c613399a47b7111420b0cca78, type: 3}
 --- !u!54 &3501739287247979765
 Rigidbody:
   m_ObjectHideFlags: 0

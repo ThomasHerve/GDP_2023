@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     [Header("Graphics")]
     [SerializeField]
     float deathAnimationTime;
+    [SerializeField]
+    GameObject deathParticleEffect;
 
     // Velocity management
     private Vector3 targetVelocity;
@@ -28,12 +30,15 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigidbody;
     private GameLoop gameLoop;
 
+    private float startYPosition;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         m_Plane = new Plane(Vector3.up, Vector3.zero);
         gameLoop = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameLoop>();
+        startYPosition = transform.position.y;
     }
 
     // Update is called once per frame
@@ -113,6 +118,8 @@ public class PlayerController : MonoBehaviour
     public void Reset()
     {
         PlayerStats.Reset();
+        transform.localScale = new Vector3(1, 1, 1);
+        transform.position = new Vector3(transform.position.x, startYPosition, transform.position.z);
     }
 
     IEnumerator deathCoroutine()
@@ -121,12 +128,14 @@ public class PlayerController : MonoBehaviour
         while(currentDeathAnimationTime < deathAnimationTime)
         {
             currentDeathAnimationTime += Time.deltaTime;
-            transform.localScale = new Vector3(1 - (currentDeathAnimationTime / deathAnimationTime), 1 - (currentDeathAnimationTime / deathAnimationTime), 1 - (currentDeathAnimationTime / deathAnimationTime));
-            transform.position = new Vector3(transform.position.x, transform.localScale.y / 2, transform.position.z);
+            if(1 - (currentDeathAnimationTime / deathAnimationTime) > 0)
+            {
+                transform.localScale = new Vector3(1 - (currentDeathAnimationTime / deathAnimationTime), 1 - (currentDeathAnimationTime / deathAnimationTime), 1 - (currentDeathAnimationTime / deathAnimationTime));
+                transform.position = new Vector3(transform.position.x, transform.localScale.y / 2, transform.position.z);
+            }
             yield return null;
         }
-        
-        yield return null;
+        Instantiate(deathParticleEffect, transform.position, Quaternion.identity);
     }
 
 }
