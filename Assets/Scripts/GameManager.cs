@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerStats.experience >= PlayerStats.nextLevelExp)
+        if(PlayerStats.experience >= PlayerStats.NEXT_LEVEL_EXP)
         {
             isPaused = true;
             PlayerStats.LevelUp();
