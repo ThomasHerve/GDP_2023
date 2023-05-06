@@ -15,6 +15,17 @@ public static class PlayerStats
     static public int resistance = 100;
     static public int damage = 100;
     
+    static public void Reset()
+    {
+        experience = 0;
+        level = 1;
+        nextLevelExp = level * level * 10;
+
+        hpMax = 10;
+        hp = hpMax;
+        resistance = 100;
+        damage = 100;
+    }
 
     static public void LevelUp()
     {

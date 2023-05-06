@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -11,35 +12,41 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float acceleration;
 
+    [Header("Graphics")]
     [SerializeField]
-    UnityEvent end;
+    float deathAnimationTime;
 
     // Velocity management
     private Vector3 targetVelocity;
     private Vector3 currentVelocity;
-
+    
     // Keyboard specific
     Plane m_Plane;
     Vector3 mousePosition;
 
     // Components
     private Rigidbody rigidbody;
+    private GameLoop gameLoop;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         m_Plane = new Plane(Vector3.up, Vector3.zero);
+        gameLoop = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameLoop>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * acceleration);
-        rigidbody.velocity = currentVelocity;
-        if(mousePosition != null)
+        if(PlayerStats.hp > 0)
         {
-            ComputeRotateMouse();
+            currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * acceleration);
+            rigidbody.velocity = currentVelocity;
+            if (mousePosition != null)
+            {
+                ComputeRotateMouse();
+            }
         }
     }
 
@@ -92,8 +99,34 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamages(int damages)
     {
-        //TODO
-        Debug.Log("JE SUIS COLLISION");
+        if(PlayerStats.hp > 0)
+        {
+            PlayerStats.hp -= damages;
+            if (PlayerStats.hp <= 0)
+            {
+                gameLoop.EndGame();
+                StartCoroutine(deathCoroutine());
+            }
+        }
+    }
+
+    public void Reset()
+    {
+        PlayerStats.Reset();
+    }
+
+    IEnumerator deathCoroutine()
+    {
+        float currentDeathAnimationTime = 0;
+        while(currentDeathAnimationTime < deathAnimationTime)
+        {
+            currentDeathAnimationTime += Time.deltaTime;
+            transform.localScale = new Vector3(1 - (currentDeathAnimationTime / deathAnimationTime), 1 - (currentDeathAnimationTime / deathAnimationTime), 1 - (currentDeathAnimationTime / deathAnimationTime));
+            transform.position = new Vector3(transform.position.x, transform.localScale.y / 2, transform.position.z);
+            yield return null;
+        }
+        
+        yield return null;
     }
 
 }

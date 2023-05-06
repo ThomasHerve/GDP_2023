@@ -7,6 +7,9 @@ public class Ennemy : MonoBehaviour
 {
     [Header("Parametres")]
     [SerializeField]
+    private int hp;
+    
+    [SerializeField]
     private int damage;
 
     private NavMeshAgent navMeshAgent;
@@ -22,6 +25,7 @@ public class Ennemy : MonoBehaviour
     private float outTime = 0.5f;
     private float currentOutTime = 0;
 
+    private bool frozen = false;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +38,8 @@ public class Ennemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        navMeshAgent.destination = player.transform.position;
+        if(!frozen)
+            navMeshAgent.destination = player.transform.position;
 
 
         if(currentOutTime > 0)
@@ -63,7 +68,6 @@ public class Ennemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("Enter");
             isCollided = true;
         }
     }
@@ -76,4 +80,16 @@ public class Ennemy : MonoBehaviour
         }
     }
 
+    public void Die()
+    {
+        //Die animation
+
+        Destroy(gameObject);
+    }
+
+    public void Freeze()
+    {
+        navMeshAgent.destination = transform.position;
+        frozen = true;
+    }
 }
