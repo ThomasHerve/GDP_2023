@@ -758,6 +758,10 @@ PrefabInstance:
       value: Ennemy
       objectReference: {fileID: 0}
     - target: {fileID: 6869507943456372070, guid: 03f02d5e411aabd4891349ece3b0b7d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6869507943456372070, guid: 03f02d5e411aabd4891349ece3b0b7d1, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -850,5 +854,6 @@ PrefabInstance:
       propertyPath: end.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4330128642365653950, guid: 64b45fbcb809c0b498f81cf0de91dfe4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 64b45fbcb809c0b498f81cf0de91dfe4, type: 3}
