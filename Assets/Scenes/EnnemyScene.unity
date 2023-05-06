@@ -701,14 +701,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 626075200072695260, guid: 03f02d5e411aabd4891349ece3b0b7d1, type: 3}
-      propertyPath: damage
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 626075200072695260, guid: 03f02d5e411aabd4891349ece3b0b7d1, type: 3}
-      propertyPath: damageTime
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5179530971709800297, guid: 03f02d5e411aabd4891349ece3b0b7d1, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -756,14 +748,6 @@ PrefabInstance:
     - target: {fileID: 6869507943456372070, guid: 03f02d5e411aabd4891349ece3b0b7d1, type: 3}
       propertyPath: m_Name
       value: Ennemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 6869507943456372070, guid: 03f02d5e411aabd4891349ece3b0b7d1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6869507943456372070, guid: 03f02d5e411aabd4891349ece3b0b7d1, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03f02d5e411aabd4891349ece3b0b7d1, type: 3}
@@ -822,38 +806,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3501739287247979766, guid: 64b45fbcb809c0b498f81cf0de91dfe4, type: 3}
-      propertyPath: deathAnimationTime
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3501739287247979766, guid: 64b45fbcb809c0b498f81cf0de91dfe4, type: 3}
-      propertyPath: end.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3501739287247979766, guid: 64b45fbcb809c0b498f81cf0de91dfe4, type: 3}
-      propertyPath: end.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3501739287247979766, guid: 64b45fbcb809c0b498f81cf0de91dfe4, type: 3}
-      propertyPath: end.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 619673531}
-    - target: {fileID: 3501739287247979766, guid: 64b45fbcb809c0b498f81cf0de91dfe4, type: 3}
-      propertyPath: end.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3501739287247979766, guid: 64b45fbcb809c0b498f81cf0de91dfe4, type: 3}
-      propertyPath: end.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: EndGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 3501739287247979766, guid: 64b45fbcb809c0b498f81cf0de91dfe4, type: 3}
-      propertyPath: end.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameLoop, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3501739287247979766, guid: 64b45fbcb809c0b498f81cf0de91dfe4, type: 3}
-      propertyPath: end.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4330128642365653950, guid: 64b45fbcb809c0b498f81cf0de91dfe4, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64b45fbcb809c0b498f81cf0de91dfe4, type: 3}
