@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         canvas = GameObject.FindGameObjectWithTag("Canvas");
-        Debug.Log(canvas);
         canvas.SetActive(false);
     }
 
@@ -26,6 +25,7 @@ public class GameManager : MonoBehaviour
         {
             isPaused = true;
             PlayerStats.LevelUp();
+            canvas.GetComponent<UpgradeManager>().buildUpgrades();
             canvas.SetActive(true);
         }
 
@@ -35,4 +35,6 @@ public class GameManager : MonoBehaviour
         }
         
     }
+
+
 }
