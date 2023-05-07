@@ -7,7 +7,8 @@ using UnityEngine;
 using static PlayerStats;
 
 public class UpgradeManager : MonoBehaviour
-{   
+{
+    public Transform panel;
     int[] upgrades = new int[3];
 
 
@@ -15,7 +16,7 @@ public class UpgradeManager : MonoBehaviour
     {
         PlayerStats.pause = true;
         Time.timeScale = 0;
-        Transform panel = transform.Find("LevelUpPanel");
+        panel.gameObject.SetActive(true);
 
         upgrades[0] = Random.Range(0, System.Enum.GetNames(typeof(UpgradableStats)).Length);
         upgrades[1] = Random.Range(0, System.Enum.GetNames(typeof(UpgradableStats)).Length);
@@ -24,13 +25,12 @@ public class UpgradeManager : MonoBehaviour
         panel.Find("ButtonA").GetComponentInChildren<TextMeshProUGUI>().text = ((UpgradableStats)upgrades[0]).ToString();
         panel.Find("ButtonB").GetComponentInChildren<TextMeshProUGUI>().text = ((UpgradableStats)upgrades[1]).ToString();
         panel.Find("ButtonC").GetComponentInChildren<TextMeshProUGUI>().text = ((UpgradableStats)upgrades[2]).ToString();
-
     }
 
     public void selectUpgrade(int upgrade)
     {
         Time.timeScale = 1;
-        gameObject.SetActive(false);
+        panel.gameObject.SetActive(false);
 
         string fieldName = ((UpgradableStats)upgrades[upgrade]).ToString();
 

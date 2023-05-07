@@ -39,8 +39,10 @@ public class WaveManager : MonoBehaviour
     {
         Vector3 pos = Vector3.zero;
         bool found = false;
-        while(!found)
+        var count = 0;
+        while(!found && count < 10)
         {
+            count++;
             found = true;
             pos = CalculateCoordinates();
 

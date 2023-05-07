@@ -14,14 +14,16 @@ public class GameLoop : MonoBehaviour
     int nbEnnemySpawn;
 
     float lastSpawn;
-    
+
+    [Header("Liens canvas")]
+    [SerializeField]
+    private GameObject startText;
 
     private void Start()
     {
         nbEnnemySpawn = initialEnnemyWave;
         lastSpawn = SPAWNTIME;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        GetComponent<WaveManager>().SpawnWave(nbEnnemySpawn);
     }
 
     State state = State.WAITING_TO_START;
@@ -33,7 +35,12 @@ public class GameLoop : MonoBehaviour
         {
             case State.WAITING_TO_START:
                 // TODO: Manage tap to start
-                state = State.START;
+                startText.SetActive(true);
+                PlayerStats.pause = true;
+                if(Input.anyKey)
+                {
+                    StartGame();
+                }
                 break;
             case State.START:
                 // Set all needed variables
@@ -65,6 +72,14 @@ public class GameLoop : MonoBehaviour
     }
 
     // Functions to invoke 
+
+    public void StartGame()
+    {
+        PlayerStats.pause = false;
+        startText.SetActive(false);
+        state = State.START;
+    }
+
     public void EndGame()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");

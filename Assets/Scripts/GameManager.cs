@@ -5,7 +5,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     //Tagged Scene Objects
+    [SerializeField]
     GameObject canvas;
+    [SerializeField]
+    UpgradeManager upgradeManager;
     
     bool isPaused = true;
 
@@ -14,7 +17,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        canvas = GameObject.FindGameObjectWithTag("Canvas");
         canvas.SetActive(false);
     }
 
@@ -25,7 +27,7 @@ public class GameManager : MonoBehaviour
         {
             isPaused = true;
             PlayerStats.LevelUp();
-            canvas.GetComponent<UpgradeManager>().buildUpgrades();
+            upgradeManager.buildUpgrades();
             canvas.SetActive(true);
         }
 
