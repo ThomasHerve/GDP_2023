@@ -26,12 +26,19 @@ public class Bottle : MonoBehaviour
     {
         if (collision.gameObject.tag == "Plane")
         {
-            Vector3 contactPoint = collision.contacts[0].point;
-            GameObject decal = Instantiate(decalPrefab, new Vector3(contactPoint.x, 0.1f, contactPoint.z), Quaternion.identity);
+            Vector3 contactPoint = new Vector3(collision.contacts[0].point.x, 0.1f, collision.contacts[0].point.z) ;
+
+            gameObject.AddComponent<SphereCollider>().radius = PlayerStats.bottleDamageRadius;
+            Destroy(gameObject.GetComponent<SphereCollider>(),0.1f);
+
+            GameObject decal = Instantiate(decalPrefab, contactPoint, Quaternion.identity);
             Destroy(decal, 10f);
 
             Destroy(gameObject.GetComponent<Rigidbody>());
             transform.position = new Vector3(0, -1, 0);
         }
     }
+
+
+
 }

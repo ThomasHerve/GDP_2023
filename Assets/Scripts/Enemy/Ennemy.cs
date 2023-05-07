@@ -31,6 +31,7 @@ public class Ennemy : MonoBehaviour
     private float damageTime;
     private float currentDamageTime = 0;
     private bool isCollided = false;
+    private bool isSlowed = false;
 
     private float outTime = 0.5f;
     private float currentOutTime = 0;
@@ -97,6 +98,13 @@ public class Ennemy : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             isCollided = true;
+        }else if(collision.gameObject.tag == "Sauce")
+        {
+            navMeshAgent.speed /= PlayerStats.SLOW_GRADIENT;
+        }
+        else if(collision.gameObject.tag == "Bottle")
+        {
+            TakeDamage(PlayerStats.bottleDamage);
         }
     }
 
@@ -105,6 +113,10 @@ public class Ennemy : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             currentOutTime = outTime;
+        }
+        else if (collision.gameObject.tag == "Sauce")
+        {
+            navMeshAgent.speed *= PlayerStats.SLOW_GRADIENT;
         }
     }
 

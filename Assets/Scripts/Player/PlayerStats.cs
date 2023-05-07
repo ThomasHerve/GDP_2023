@@ -6,17 +6,25 @@ public static class PlayerStats
 {
     //Player Consts  : To configure
     static public int NEXT_LEVEL_EXP { get { return level * level * 10; } }
+    static public int SLOW_GRADIENT { get { return 2+bottleSlow/10; } }
     public const int HPMAX_BASE = 10;
     public const int RESISTANCE_BASE = 0;
     public const int DAMAGE_BASE = 10;
     public const int THROWFORCE_BASE = 10;
-    public const float BOTTLECD_BASE = 2;
+    public const int BOTTLECD_BASE = 2;
+    public const int BOTTLEDAMAGE_BASE = 10;
+    public const int BOTTLEDAMAGERADIUS_BASE = 10;
+    public const int BOTTLESLOW_BASE = 0;
 
     //Player upgrades : To configure
     static public int hpMaxAugment = 10;
     static public int damageAugment = 10;
     static public int resistanceAugment = 10;
     static public int throwForceAugment = 1;
+    static public int bottleCdAugment = -1;
+    static public int bottleDamageAugment = 10;
+    static public int bottleDamageRadiusAugment = 1;
+    static public int bottleSlowAugment = 2;
 
     //Player stats
     static public int experience = 0;
@@ -29,8 +37,10 @@ public static class PlayerStats
     static public int resistance = RESISTANCE_BASE;
     static public int damage = DAMAGE_BASE;
     static public int throwForce = THROWFORCE_BASE;
-    static public float bottleCd = BOTTLECD_BASE;
-
+    static public int bottleCd = BOTTLECD_BASE;
+    static public int bottleDamage = BOTTLEDAMAGE_BASE;
+    static public int bottleDamageRadius = BOTTLEDAMAGERADIUS_BASE;
+    static public int bottleSlow = BOTTLESLOW_BASE;
     // Game var
     static public bool pause;
 
@@ -38,7 +48,12 @@ public static class PlayerStats
     {
         hpMax,
         resistance,
-        damage
+        damage,
+        throwForce,
+        bottleCd,
+        bottleDamage,
+        bottleDamageRadius,
+        bottleSlow
     }
 
     static public void Reset()
@@ -53,7 +68,9 @@ public static class PlayerStats
         damage = DAMAGE_BASE;
         throwForce = THROWFORCE_BASE;
         bottleCd = BOTTLECD_BASE;
-
+        bottleDamage = BOTTLEDAMAGE_BASE;
+        bottleDamageRadius = BOTTLEDAMAGERADIUS_BASE;
+        bottleSlow = BOTTLESLOW_BASE;
     }
 
     static public void GainXP(int value)
