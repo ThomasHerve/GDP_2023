@@ -13,7 +13,7 @@ public static class PlayerStats
     public const int THROWFORCE_BASE = 10;
     public const int BOTTLECD_BASE = 2;
     public const int BOTTLEDAMAGE_BASE = 10;
-    public const int BOTTLEDAMAGERADIUS_BASE = 10;
+    public const int BOTTLEDAMAGERADIUS_BASE = 3;
     public const int BOTTLESLOW_BASE = 0;
 
     //Player upgrades : To configure
@@ -27,13 +27,13 @@ public static class PlayerStats
     static public int bottleSlowAugment = 2;
 
     //Player stats
-    static public int experience = 0;
+    static private int _experience = 0;
     static public int level = 1;
-    static public int hp = HPMAX_BASE;
+    static private int _hp= HPMAX_BASE;
     static public bool isBottleUp = true;
 
     //Player upgradable stats
-    static public int hpMax = HPMAX_BASE;
+    static private int _hpMax = HPMAX_BASE;
     static public int resistance = RESISTANCE_BASE;
     static public int damage = DAMAGE_BASE;
     static public int throwForce = THROWFORCE_BASE;
@@ -41,8 +41,16 @@ public static class PlayerStats
     static public int bottleDamage = BOTTLEDAMAGE_BASE;
     static public int bottleDamageRadius = BOTTLEDAMAGERADIUS_BASE;
     static public int bottleSlow = BOTTLESLOW_BASE;
+
+
+    // Properties for updates
+    static public int hp { get { return _hp; } set { _hp = value; gameManager.UpdateHealthBar(); } }
+    static public int hpMax { get { return _hpMax; } set { _hpMax = value; gameManager.UpdateHealthBar(); } }
+    static public int experience { get { return _experience; } set { _experience = value; gameManager.updateExpBar(); } }
+
     // Game var
     static public bool pause;
+    static public GameManager gameManager;
 
     public enum UpgradableStats
     {
@@ -84,6 +92,7 @@ public static class PlayerStats
         var overlapXP = experience - NEXT_LEVEL_EXP;
         level +=1;
         experience = overlapXP;
+        gameManager.updateExpBarMax();
     }
 
     static public void TakeDamage(int baseDmg)

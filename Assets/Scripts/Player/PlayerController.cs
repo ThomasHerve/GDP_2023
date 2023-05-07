@@ -31,6 +31,10 @@ public class PlayerController : MonoBehaviour
 
     private float startYPosition;
 
+    private Animator animator;
+    public float movementThreshold = 3f;
+    public bool isMoving = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +42,7 @@ public class PlayerController : MonoBehaviour
         m_Plane = new Plane(Vector3.up, Vector3.zero);
         gameLoop = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameLoop>();
         startYPosition = transform.position.y;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -49,6 +54,17 @@ public class PlayerController : MonoBehaviour
         {
             currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * acceleration);
             rigidbody.velocity = currentVelocity;
+            if (!isMoving && rigidbody.velocity.magnitude > movementThreshold)
+            {
+                isMoving = true;
+                animator.SetBool("isWalking", true);
+            }
+            if(isMoving && rigidbody.velocity.magnitude < movementThreshold)
+            {
+                isMoving = false;
+                animator.SetBool("isWalking", false);
+            }
+
             if (mousePosition != null)
             {
                 ComputeRotateMouse();
@@ -62,7 +78,7 @@ public class PlayerController : MonoBehaviour
         Vector2 newVelocity = context.ReadValue<Vector2>();
         targetVelocity = new Vector3(newVelocity.x, 0, newVelocity.y) * speed;
     }
-    
+
     public void Rotate(InputAction.CallbackContext context)
     {
         Vector3 v = new Vector3(context.ReadValue<Vector2>().x, context.ReadValue<Vector2>().y, 0);

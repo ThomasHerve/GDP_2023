@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     //Tagged Scene Objects
     [SerializeField]
-    GameObject canvas;
+    GameObject HealthBar;
+    [SerializeField]
+    GameObject ExpBar;
+    [SerializeField]
+    GameObject LevelUpPanel;
     [SerializeField]
     UpgradeManager upgradeManager;
     
@@ -17,7 +22,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        canvas.SetActive(false);
+        PlayerStats.gameManager = this;
+        UpdateHealthBarmax();
+        UpdateHealthBar();
+        updateExpBarMax();
+        updateExpBar();
+
+
     }
 
     // Update is called once per frame
@@ -28,7 +39,7 @@ public class GameManager : MonoBehaviour
             isPaused = true;
             PlayerStats.LevelUp();
             upgradeManager.buildUpgrades();
-            canvas.SetActive(true);
+            LevelUpPanel.SetActive(true);
         }
 
         if (isPaused)
@@ -39,4 +50,22 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void UpdateHealthBar()
+    {
+        HealthBar.GetComponent<Slider>().value = PlayerStats.hp;
+    }
+    public void UpdateHealthBarmax()
+    {
+        HealthBar.GetComponent<Slider>().maxValue = PlayerStats.hpMax;
+    }
+
+    public void updateExpBar()
+    {
+        ExpBar.GetComponent<Slider>().value = PlayerStats.experience;
+    }
+
+    public void updateExpBarMax()
+    {
+        ExpBar.GetComponent<Slider>().maxValue = PlayerStats.NEXT_LEVEL_EXP;
+    }
 }
