@@ -67,7 +67,6 @@ public class WaveManager : MonoBehaviour
                 found = false;
             }
         }
-        Debug.Log(pos);
         return pos;
         // return Vector3.zero;
     }
