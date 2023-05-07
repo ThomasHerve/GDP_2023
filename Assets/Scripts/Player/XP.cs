@@ -35,6 +35,7 @@ public class XP : MonoBehaviour
     {
         if(launched == 1)
         {
+            ps.collision.AddPlane(GameObject.FindGameObjectWithTag("Plane").transform);
             ps.emission.SetBurst(0, new ParticleSystem.Burst(0, 1, number, 0.1f));
             ps.Play();
             var main = ps.main;
