@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Bottle : MonoBehaviour
@@ -28,8 +29,11 @@ public class Bottle : MonoBehaviour
         {
             Vector3 contactPoint = new Vector3(collision.contacts[0].point.x, 0.1f, collision.contacts[0].point.z) ;
 
-            gameObject.AddComponent<SphereCollider>().radius = PlayerStats.bottleDamageRadius;
-            Destroy(gameObject.GetComponent<SphereCollider>(),0.1f);
+            Collider[] colliders = Physics.OverlapSphere(contactPoint, PlayerStats.bottleDamageRadius);
+            foreach (Ennemy ennemy in colliders.Select(collider => collider.GetComponent<Ennemy>()).Where(ennemy => ennemy != null))
+            {
+                ennemy.Blast();
+            }
 
             GameObject decal = Instantiate(decalPrefab, contactPoint, Quaternion.identity);
             Destroy(decal, 10f);
