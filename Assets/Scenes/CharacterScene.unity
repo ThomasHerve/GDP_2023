@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceSpawn: 20
-  enemy: {fileID: 6869507943456372070, guid: 03f02d5e411aabd4891349ece3b0b7d1, type: 3}
+  enemy: {fileID: 5906157633749571175, guid: fdcd11f5b5c9542448a43999565e1237, type: 3}
 --- !u!4 &876687602 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3501739287042536448, guid: 64b45fbcb809c0b498f81cf0de91dfe4, type: 3}

@@ -67,7 +67,7 @@ public class WaveManager : MonoBehaviour
                 found = false;
             }
         }
-
+        Debug.Log(pos);
         return pos;
         // return Vector3.zero;
     }
@@ -83,6 +83,6 @@ public class WaveManager : MonoBehaviour
         float x = (playerPostion.x + r * Mathf.Cos(Mathf.Deg2Rad * angle));
         float z = (playerPostion.z + r * Mathf.Sin(Mathf.Deg2Rad * angle));
 
-        return new Vector3(x, player.transform.position.y, z);
+        return new Vector3(x, 0, z);
     }
 }
