@@ -13,8 +13,8 @@ public static class PlayerStats
 
     //Player upgrades : To configure
     static public int hpMaxAugment = 10;
-    static public int dmgAugment = 10;
-    static public int resistAugment = 10;
+    static public int damageAugment = 10;
+    static public int resistanceAugment = 10;
     static public int throwForceAugment = 1;
 
     //Player stats
