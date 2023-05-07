@@ -15,7 +15,7 @@ public class GameLoop : MonoBehaviour
 
     float lastSpawn;
 
-    [Header("Liens canvas")]
+    [Header("Liens LevelUpPanel")]
     [SerializeField]
     private GameObject startText;
 
