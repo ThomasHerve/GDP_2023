@@ -10,6 +10,7 @@ public static class PlayerStats
     public const int RESISTANCE_BASE = 0;
     public const int DAMAGE_BASE = 10;
     public const int THROWFORCE_BASE = 10;
+    public const float BOTTLECD_BASE = 2;
 
     //Player upgrades : To configure
     static public int hpMaxAugment = 10;
@@ -21,10 +22,14 @@ public static class PlayerStats
     static public int experience = 0;
     static public int level = 1;
     static public int hp = HPMAX_BASE;
+    static public bool isBottleUp = true;
+
+    //Player upgradable stats
     static public int hpMax = HPMAX_BASE;
     static public int resistance = RESISTANCE_BASE;
     static public int damage = DAMAGE_BASE;
     static public int throwForce = THROWFORCE_BASE;
+    static public float bottleCd = BOTTLECD_BASE;
 
     // Game var
     static public bool pause;
@@ -40,11 +45,15 @@ public static class PlayerStats
     {
         experience = 0;
         level = 1;
+        isBottleUp = true;
 
-        hpMax = HPMAX_BASE;
-        hp = HPMAX_BASE;
+
+        hp = hpMax = HPMAX_BASE;
         resistance = RESISTANCE_BASE;
         damage = DAMAGE_BASE;
+        throwForce = THROWFORCE_BASE;
+        bottleCd = BOTTLECD_BASE;
+
     }
 
     static public void GainXP(int value)

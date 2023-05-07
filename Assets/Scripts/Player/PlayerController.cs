@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
 
     private float startYPosition;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +54,7 @@ public class PlayerController : MonoBehaviour
                 ComputeRotateMouse();
             }
         }
+
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -153,22 +153,10 @@ public class PlayerController : MonoBehaviour
 
     public void ThrowBottle()
     {
-        transform.Find("LeftHand").GetComponent<Animation>().Play();
-        StartCoroutine(ThrowBottleCoroutine());
+        if (PlayerStats.isBottleUp)
+            transform.Find("LeftHand").GetComponent<Animation>().Play();
 
     }
 
-    private IEnumerator ThrowBottleCoroutine()
-    {
-        yield return new WaitForSeconds(1f);        // Attendre que l'animation d'attaque à distance commence
 
-        Transform bottleTransform = transform.Find("Bottle");
-
-        bottleTransform.position = new Vector3(-0.4f, 0.4f, 0.4f); // A SUPPRIMER APRES AVOIR FAIT L'ANIMATION
-
-        bottleTransform.parent = null;
-
-        bottleTransform.GetComponent<Rigidbody>().AddForce(transform.forward * PlayerStats.throwForce, ForceMode.Impulse);
-        
-    }
 }
