@@ -13,7 +13,7 @@ public static class PlayerStats
     public const int THROWFORCE_BASE = 10;
     public const int BOTTLECD_BASE = 2;
     public const int BOTTLEDAMAGE_BASE = 10;
-    public const int BOTTLEDAMAGERADIUS_BASE = 10;
+    public const int BOTTLEDAMAGERADIUS_BASE = 3;
     public const int BOTTLESLOW_BASE = 0;
 
     //Player upgrades : To configure

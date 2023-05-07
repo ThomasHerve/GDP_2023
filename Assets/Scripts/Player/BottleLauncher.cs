@@ -17,7 +17,7 @@ public class BottleLauncher : MonoBehaviour
             return;
 
         bottleCount += Time.deltaTime;
-        if (bottleCount >= PlayerStats.bottleCd)
+        if (bottleCount >= Mathf.Max(PlayerStats.bottleCd, 2))
         {
             ResetBottle();
             bottleCount = 0;
