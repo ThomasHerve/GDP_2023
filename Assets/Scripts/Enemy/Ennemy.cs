@@ -38,6 +38,11 @@ public class Ennemy : MonoBehaviour
     private bool frozen = false;
     private bool dead = false;
 
+    // Invincibility
+    private float invicibilityTime = 0.8f;
+    private float currentInvicibilityTime = 0;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -116,5 +121,18 @@ public class Ennemy : MonoBehaviour
         hp -= dmg;
         if (hp < 0)
             Die();
+        StartCoroutine(InvincibilityRoutine());
+    }
+
+    IEnumerator InvincibilityRoutine()
+    {
+        GetComponent<Collider>().enabled = false;
+        currentInvicibilityTime = 0;
+        while(currentInvicibilityTime < invicibilityTime)
+        {
+            currentInvicibilityTime += Time.deltaTime;
+            yield return null;
+        }
+        GetComponent<Collider>().enabled = true;
     }
 }
