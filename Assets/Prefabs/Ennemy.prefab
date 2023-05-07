@@ -135,7 +135,7 @@ MonoBehaviour:
   numberXP: 5
   valueXP: 1
   particles: {fileID: 4665408664960222323, guid: 17af93a880ef3a446a4effafbf8d626d, type: 3}
-  knockbackForce: 20
+  knockbackForce: 50
   damageTime: 1
 --- !u!195 &626075200072695261
 NavMeshAgent:
