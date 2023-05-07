@@ -10,7 +10,6 @@ TagManager:
   - Plane
   - LeftHand
   - Sauce
-  - Bottle
   layers:
   - Default
   - TransparentFX
