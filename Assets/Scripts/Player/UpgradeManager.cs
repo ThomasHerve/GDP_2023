@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using static PlayerStats;
 
@@ -12,6 +13,8 @@ public class UpgradeManager : MonoBehaviour
 
     public void buildUpgrades()
     {
+        PlayerStats.pause = true;
+        Time.timeScale = 0;
         Transform panel = transform.Find("LevelUpPanel");
 
         upgrades[0] = Random.Range(0, System.Enum.GetNames(typeof(UpgradableStats)).Length);
@@ -26,6 +29,7 @@ public class UpgradeManager : MonoBehaviour
 
     public void selectUpgrade(int upgrade)
     {
+        Time.timeScale = 1;
         gameObject.SetActive(false);
 
         string fieldName = ((UpgradableStats)upgrades[upgrade]).ToString();
@@ -36,6 +40,7 @@ public class UpgradeManager : MonoBehaviour
         field.SetValue(null, (int)field.GetValue(null) + (int)upgradeField.GetValue(null));
 
         upgrades = new int[3];
+        PlayerStats.pause = false;
     }
 
 

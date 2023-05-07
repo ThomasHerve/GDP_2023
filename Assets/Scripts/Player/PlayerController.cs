@@ -44,7 +44,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerStats.hp > 0)
+        if (PlayerStats.pause)
+            return;
+        if (PlayerStats.hp > 0)
         {
             currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * acceleration);
             rigidbody.velocity = currentVelocity;
@@ -141,7 +143,7 @@ public class PlayerController : MonoBehaviour
     // XP
     public void GetXP(int value)
     {
-        Debug.Log("get xp");
+        PlayerStats.GainXP(value);
     }
 
     public void Hit()

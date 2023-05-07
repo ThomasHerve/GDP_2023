@@ -26,6 +26,9 @@ public static class PlayerStats
     static public int damage = DAMAGE_BASE;
     static public int throwForce = THROWFORCE_BASE;
 
+    // Game var
+    static public bool pause;
+
     public enum UpgradableStats
     {
         hpMax,
@@ -44,11 +47,17 @@ public static class PlayerStats
         damage = DAMAGE_BASE;
     }
 
+    static public void GainXP(int value)
+    {
+        experience += value;
+    }
+
 
     static public void LevelUp()
     {
-        level+=1;
-        experience = 0;
+        var overlapXP = experience - NEXT_LEVEL_EXP;
+        level +=1;
+        experience = overlapXP;
     }
 
     static public void TakeDamage(int baseDmg)

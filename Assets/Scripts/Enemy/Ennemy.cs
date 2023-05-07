@@ -42,6 +42,9 @@ public class Ennemy : MonoBehaviour
     private float invicibilityTime = 0.8f;
     private float currentInvicibilityTime = 0;
 
+    // Pause
+    private bool pauseTriggered = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +57,16 @@ public class Ennemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerStats.pause)
+        {
+            if (!pauseTriggered) {
+                pauseTriggered = true;
+                navMeshAgent.destination = transform.position;
+            }
+            return;
+        }
+
+
         if(!frozen && navMeshAgent.isOnNavMesh)
             navMeshAgent.destination = player.transform.position;
 
