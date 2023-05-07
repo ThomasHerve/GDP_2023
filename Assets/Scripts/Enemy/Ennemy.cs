@@ -46,7 +46,7 @@ public class Ennemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!frozen)
+        if(!frozen && navMeshAgent.isOnNavMesh)
             navMeshAgent.destination = player.transform.position;
 
         if(currentOutTime > 0)

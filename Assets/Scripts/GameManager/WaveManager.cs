@@ -7,7 +7,6 @@ public class WaveManager : MonoBehaviour
     // On veut faired es waves
     // get gameobject enemy
     public float distanceSpawn;
-    public int nbEnemyPerWave = 7;
     private GameObject player;
     public GameObject enemy;
 
@@ -24,7 +23,7 @@ public class WaveManager : MonoBehaviour
         // Increase le nombre de spawn avec le temps
     }
 
-    public void SpawnWave()
+    public void SpawnWave(int nbEnemyPerWave)
     {
         // Spawn grâce à l'instantiation en boucle de "enemy" qui pointe sur le GameObject ennemy
         for (int i = 0; i < nbEnemyPerWave; i++)

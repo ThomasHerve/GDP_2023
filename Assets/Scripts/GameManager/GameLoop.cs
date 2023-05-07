@@ -5,14 +5,23 @@ using UnityEngine;
 public class GameLoop : MonoBehaviour
 {
     PlayerController player;
-    const float SPAWNTIME = 1;
-    public float lastSpawn = SPAWNTIME;
+    [SerializeField]
+    float SPAWNTIME = 1;
+    [SerializeField]
+    int maxEnemy;
+    [SerializeField]
+    int initialEnnemyWave;
+    int nbEnnemySpawn;
+
+    float lastSpawn;
     
 
     private void Start()
     {
+        nbEnnemySpawn = initialEnnemyWave;
+        lastSpawn = SPAWNTIME;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        GetComponent<WaveManager>().SpawnWave();
+        GetComponent<WaveManager>().SpawnWave(nbEnnemySpawn);
     }
 
     State state = State.WAITING_TO_START;
@@ -40,7 +49,9 @@ public class GameLoop : MonoBehaviour
                 lastSpawn -= Time.deltaTime;
                 if (lastSpawn <= 0)
                 {
-                    GetComponent<WaveManager>().SpawnWave();
+                    // Check for max
+                    int CurrentnbEnnemySpawn = Mathf.Min(nbEnnemySpawn, Mathf.Max(0, maxEnemy - GameObject.FindGameObjectsWithTag("Enemy").Length));
+                    GetComponent<WaveManager>().SpawnWave(CurrentnbEnnemySpawn);
                     lastSpawn = SPAWNTIME;
                 }
                 break;
