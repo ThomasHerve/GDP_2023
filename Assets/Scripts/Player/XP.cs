@@ -3,7 +3,12 @@ using UnityEngine;
 
 public class XP : MonoBehaviour
 {
+    PlayerController player;
     private int xp;
+    private int number;
+    private bool up = false;
+    private bool started = false;
+    private int launched = 0; 
 
     // XP
     ParticleSystem ps;
@@ -12,37 +17,53 @@ public class XP : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         ps = GetComponent<ParticleSystem>();
+        ps.trigger.AddCollider(GameObject.FindGameObjectWithTag("Player").GetComponent<CapsuleCollider>());
         ps.Stop();
-        Launch(4, 1);
     }
 
 
     public void Launch(int number, int xpGained)
     {
-        ps.trigger.AddCollider(GameObject.FindGameObjectWithTag("Player").GetComponent<CapsuleCollider>());
-        ps.emission.SetBurst(0, new ParticleSystem.Burst(0, 1, number, 0.1f));
-        ps.Play();
         xp = xpGained;
-        var main = ps.main;
-        main.maxParticles = number;
+        this.number = number;
+        launched = 1;
     }
 
-    // XP
-    private void OnParticleCollision(GameObject other)
+    private void Update()
     {
-        if(other.tag == "Player")
+        if(launched == 1)
         {
-            int triggerParticles = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, particles);
-            for (int i = 0; i < triggerParticles; i++)
+            ps.emission.SetBurst(0, new ParticleSystem.Burst(0, 1, number, 0.1f));
+            ps.Play();
+            var main = ps.main;
+            main.maxParticles = number;
+            started = true;
+            launched = 2;
+        }
+        if (!started)
+            return;
+        if (up)
+        {
+            if (ps.particleCount < number)
             {
-                ParticleSystem.Particle p = particles[i];
-                p.remainingLifetime = 0;
-                other.gameObject.GetComponent<PlayerController>().GetXP(xp);
-                particles[i] = p;
+                for (int i = ps.particleCount; i < number; i++)
+                {
+                    player.GetXP(xp);
+                }
+                number = ps.particleCount;
             }
-
-            ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, particles);
+        }
+        else
+        {
+            if (ps.particleCount == number)
+            {
+                up = true;
+                var e = ps.externalForces;
+                e.enabled = true;
+            }
         }
     }
+
 }

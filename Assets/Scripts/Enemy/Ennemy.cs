@@ -33,6 +33,7 @@ public class Ennemy : MonoBehaviour
     private float currentOutTime = 0;
 
     private bool frozen = false;
+    private bool dead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -72,7 +73,6 @@ public class Ennemy : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Player")
         {
             isCollided = true;
@@ -89,9 +89,14 @@ public class Ennemy : MonoBehaviour
 
     public void Die()
     {
-        GetComponent<Animation>().Play("SimpleDeath");
-        Instantiate(particles, transform.position, Quaternion.identity);
-        Destroy(gameObject,2);
+        if(!dead)
+        {
+            dead = true;
+            GetComponent<Animation>().Play("SimpleDeath");
+            var xp = Instantiate(particles, transform.position, Quaternion.identity);
+            xp.GetComponent<XP>().Launch(numberXP, valueXP);
+            Destroy(gameObject, 2);
+        }
     }
 
     public void Freeze()

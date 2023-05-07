@@ -144,7 +144,6 @@ public class PlayerController : MonoBehaviour
         Debug.Log("get xp");
     }
 
-
     public void Hit()
     {
         transform.Find("Whip").GetComponent<Animation>().Play();
