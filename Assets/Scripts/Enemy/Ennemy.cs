@@ -19,6 +19,9 @@ public class Ennemy : MonoBehaviour
     [SerializeField]
     private GameObject particles;
 
+    [SerializeField]
+    float knockbackForce = 20f;
+
     private NavMeshAgent navMeshAgent;
     private GameObject player;
     private PlayerController playerController;
@@ -107,6 +110,9 @@ public class Ennemy : MonoBehaviour
 
     public void TakeDamage(int dmg)
     {
+        Vector3 knockbackDirection = transform.forward * -1f;
+        GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
+        
         hp -= dmg;
         if (hp < 0)
             Die();

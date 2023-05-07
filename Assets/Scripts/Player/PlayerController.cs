@@ -146,6 +146,27 @@ public class PlayerController : MonoBehaviour
 
     public void Hit()
     {
-        transform.Find("Whip").GetComponent<Animation>().Play();
+        transform.Find("RightHand").GetComponent<Animation>().Play();
+    }
+
+    public void ThrowBottle()
+    {
+        transform.Find("LeftHand").GetComponent<Animation>().Play();
+        StartCoroutine(ThrowBottleCoroutine());
+
+    }
+
+    private IEnumerator ThrowBottleCoroutine()
+    {
+        yield return new WaitForSeconds(1f);        // Attendre que l'animation d'attaque à distance commence
+
+        Transform bottleTransform = transform.Find("Bottle");
+
+        bottleTransform.position = new Vector3(-0.4f, 0.4f, 0.4f); // A SUPPRIMER APRES AVOIR FAIT L'ANIMATION
+
+        bottleTransform.parent = null;
+
+        bottleTransform.GetComponent<Rigidbody>().AddForce(transform.forward * PlayerStats.throwForce, ForceMode.Impulse);
+        
     }
 }
