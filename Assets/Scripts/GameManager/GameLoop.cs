@@ -16,10 +16,11 @@ public class GameLoop : MonoBehaviour
     [SerializeField]
     int initialEnemyWave;
     int nbUnlockedEnemyTypes;
+    private bool bossUnlocked;
     public static int nbEnemyType = 5;
 
     float timeInGame;
-    float TIMETOWIN = SPAWNTIME * (nbEnemyType + 1);
+    float TIMETOBOSS = SPAWNTIME * (nbEnemyType + 2);
     float lastSpawn;
     [Header("Player")]
     [SerializeField]
@@ -41,14 +42,12 @@ public class GameLoop : MonoBehaviour
    
     private void Start()
     {
-        lastSpawn = SPAWNTIME;
         playerController = player.GetComponent<PlayerController>();
-        // curve.Evaluate();
         nbUnlockedEnemyTypes = 0;
-        // nbEnemySpawn = initialEnnemyWave;
+        bossUnlocked = false;
         lastSpawn = FIRSTSPAWNTIME;
         time.text = numberOfSecondsToDisplayableString(0f);
-        time.color = new Color(1f, 1f, 0f, 0.2f);
+        time.color = new Color(1f, 1f, 1f, 0.1f);
         playerController = player.GetComponent<PlayerController>();
     }
 
@@ -74,7 +73,7 @@ public class GameLoop : MonoBehaviour
                 state = State.RUNNING;
                 break;
             case State.RUNNING:
-                double gameProgressionRate = ((double)(nbUnlockedEnemyTypes)) / ((double)nbEnemyType);
+                double gameProgressionRate = ((double)(nbUnlockedEnemyTypes)) / ((double)nbEnemyType + 1);
                 lastSpawn -= Time.deltaTime;
                 timeInGame += Time.deltaTime;
                 if (lastSpawn <= 0)
@@ -83,16 +82,51 @@ public class GameLoop : MonoBehaviour
                         1f - (float)gameProgressionRate,
                         1f,
                         0f,
-                        (0.2f + 0.7f * (float)gameProgressionRate)
+                        (0.2f + 0.8f * (float)gameProgressionRate)
                         );
-                    nbUnlockedEnemyTypes++;
-                    
-                    int nbEnemyToSpawnUnconstrained = initialEnemyWave + maxEnemy * (int)System.Math.Floor(nbEnemiesToSpawnUnconstrained.Evaluate((float) gameProgressionRate));
-                    int nbEnemyToSpawn = Mathf.Min(nbEnemyToSpawnUnconstrained, Mathf.Max(0, maxEnemy - GameObject.FindGameObjectsWithTag("Enemy").Length));
-                    if (nbEnemyToSpawn > 0) GetComponent<WaveManager>().SpawnWave(nbEnemyToSpawn, nbUnlockedEnemyTypes);
-                    lastSpawn = SPAWNTIME;
+
+                    if (nbUnlockedEnemyTypes < nbEnemyType) nbUnlockedEnemyTypes++;
+
+                    if ((nbUnlockedEnemyTypes == nbEnemyType) && !bossUnlocked)
+                    {
+                        if (timeInGame >= TIMETOBOSS)
+                        {
+                            bossUnlocked = true;
+                            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                            foreach (GameObject enemy in enemies)
+                            {
+                                Destroy(enemy, 0f);
+                            }
+                            GetComponent<WaveManager>().SpawnBoss(nbUnlockedEnemyTypes);
+                        }
+                        else
+                        {
+                            Debug.Log("Just waiting for the Boss.");
+                        }
+                    }
+                    else if (!bossUnlocked)
+                    {
+                        int nbEnemyToSpawnUnconstrained = initialEnemyWave + maxEnemy * (int)System.Math.Floor(nbEnemiesToSpawnUnconstrained.Evaluate((float)gameProgressionRate));
+                        int nbEnemyToSpawn = Mathf.Min(nbEnemyToSpawnUnconstrained, Mathf.Max(0, maxEnemy - GameObject.FindGameObjectsWithTag("Enemy").Length));
+                        if (nbEnemyToSpawn > 0) GetComponent<WaveManager>().SpawnWave(nbEnemyToSpawn, nbUnlockedEnemyTypes);
+                        lastSpawn = SPAWNTIME;
+                    }
+                    else {
+                        Debug.Log("Here doing nothing else than printing this is normal: nothing spawns after the B0$$!");
+                    }
+
                 }
-                time.text = numberOfSecondsToDisplayableString(timeInGame);
+
+                if (!bossUnlocked)
+                {
+                    time.text = numberOfSecondsToDisplayableString(timeInGame);
+                }
+                if (bossUnlocked)
+                {
+                    time.text = "BOSS\nUNLOCKED!";
+                    time.color = Color.red;
+                }
+
                 break;
             case State.END:
                 // Manage end of the game
@@ -112,8 +146,9 @@ public class GameLoop : MonoBehaviour
         state = State.START;
         initialEnemyWave = 4;
         nbUnlockedEnemyTypes = 0;
-        time.text = numberOfSecondsToDisplayableString(TIMETOWIN);
-        time.color = new Color(1f, 1f, 0f, 0.2f);
+        bossUnlocked = false;
+        time.text = numberOfSecondsToDisplayableString(TIMETOBOSS);
+        time.color = new Color(0f, 1f, 0f, 0.1f);
         Instantiate(player, Vector3.zero, Quaternion.identity);
         timeInGame = 0f;
     }
@@ -144,7 +179,7 @@ public class GameLoop : MonoBehaviour
 
     private string numberOfSecondsToDisplayableString(float time)
     {
-        time = TIMETOWIN - time;
+        time = TIMETOBOSS - time;
         int seconds = ((int) time % 60);
         int minutes = ((int) time / 60);
         return string.Format("{0:00}:{1:00}", minutes, seconds);
