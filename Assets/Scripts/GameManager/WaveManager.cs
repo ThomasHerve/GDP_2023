@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    // On veut faired es waves
+    // On veut faire des waves
     // get gameobject enemy
     public float distanceSpawn;
     private GameObject player;
-    public GameObject enemy;
+    public GameObject[] enemyType;
+    private static System.Random rng;
+    public 
 
     Vector3 boxSize = new Vector3(3,3,3);
 
@@ -16,21 +18,28 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        rng = new System.Random();
+        //enemyType = new GameObject[nbEnemyType];
     }
 
     // Update is called once per frame
     void Update()
     {
+        // We spawn every 2 minutes
+
         // Faire spawn toute les X secondes
         // Increase le nombre de spawn avec le temps
     }
 
-    public void SpawnWave(int nbEnemyPerWave)
+    public void SpawnWave(int nbEnemyToSpawn, int nbUnlockedEnemyTypes)
     {
-        // Spawn grâce à l'instantiation en boucle de "enemy" qui pointe sur le GameObject ennemy
-        for (int i = 0; i < nbEnemyPerWave; i++)
+        Debug.Log(nbUnlockedEnemyTypes.ToString());
+        Debug.Log(enemyType.Length.ToString());
+        Instantiate(enemyType[nbUnlockedEnemyTypes - 1], GetCoordinates(), Quaternion.identity);
+        // Spawn grâce à l'instantiation en boucle de "enemy" qui pointe sur le GameObject enemy
+        for (int i = 0; i < nbEnemyToSpawn - 1; i++)
         {
-            Instantiate(enemy, GetCoordinates(), Quaternion.identity);
+            Instantiate(enemyType[rng.Next(0, nbUnlockedEnemyTypes - 1)], GetCoordinates(), Quaternion.identity);
         }
     }
 
