@@ -14,6 +14,7 @@ TagManager:
   - VirtualCamera
   - XP
   - fish
+  - Artefact
   layers:
   - Default
   - TransparentFX
