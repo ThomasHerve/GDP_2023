@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -59,6 +60,25 @@ public class PlayerController : MonoBehaviour
         gameLoop = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameLoop>();
         startYPosition = transform.position.y;
         animator = GetComponent<Animator>();
+        GameObject.FindGameObjectWithTag("VirtualCamera").GetComponent<CinemachineVirtualCamera>().Follow = transform;
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        for(int i = 0; i < enemies.Length; i++)
+        {
+            Destroy(enemies[i]);
+        }
+        GameObject[] xp = GameObject.FindGameObjectsWithTag("XP");
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            try
+            {
+                Destroy(xp[i]);
+            } catch
+            {
+
+            }
+            
+        }
     }
 
     // Update is called once per frame
@@ -161,7 +181,7 @@ public class PlayerController : MonoBehaviour
             PlayerStats.TakeDamage(damages);
             if (PlayerStats.hp <= 0)
             {
-                gameLoop.EndGame();
+                gameLoop.EndGame(false);
                 StartCoroutine(deathCoroutine());
             }
         }
@@ -188,6 +208,7 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
         Instantiate(deathParticleEffect, transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
     }
     
     // XP

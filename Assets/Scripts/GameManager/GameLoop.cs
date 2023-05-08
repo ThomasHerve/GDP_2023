@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameLoop : MonoBehaviour
 {
-    PlayerController player;
+    PlayerController playerController;
     [SerializeField]
     float SPAWNTIME = 1;
     [SerializeField]
@@ -14,16 +14,23 @@ public class GameLoop : MonoBehaviour
     int nbEnnemySpawn;
 
     float lastSpawn;
+    [Header("Player")]
+    [SerializeField]
+    private GameObject player;
 
     [Header("Liens LevelUpPanel")]
     [SerializeField]
     private GameObject startText;
+    [SerializeField]
+    private GameObject victory;
+    [SerializeField]
+    private GameObject defeat;
 
     private void Start()
     {
         nbEnnemySpawn = initialEnnemyWave;
         lastSpawn = SPAWNTIME;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        playerController = player.GetComponent<PlayerController>();
     }
 
     State state = State.WAITING_TO_START;
@@ -44,7 +51,7 @@ public class GameLoop : MonoBehaviour
                 break;
             case State.START:
                 // Set all needed variables
-                player.Reset();
+                playerController.Reset();
 
                 state = State.RUNNING;
                 break;
@@ -78,9 +85,10 @@ public class GameLoop : MonoBehaviour
         PlayerStats.pause = false;
         startText.SetActive(false);
         state = State.START;
+        Instantiate(player, Vector3.zero, Quaternion.identity);
     }
 
-    public void EndGame()
+    public void EndGame(bool win)
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         for (int i = 0; i < enemies.Length; i++)
@@ -88,6 +96,20 @@ public class GameLoop : MonoBehaviour
             enemies[i].GetComponent<Ennemy>().Freeze();
         }
         state = State.END;
+        if(win)
+        {
+            victory.SetActive(true);
+        } else
+        {
+            defeat.SetActive(true);
+        }
+    }
+
+    public void Replay()
+    {
+        victory.SetActive(false);
+        defeat.SetActive(false);
+        state = State.WAITING_TO_START;
     }
 
     

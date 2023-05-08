@@ -262,17 +262,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.38333333
-        value: 0.1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 0.4
-        value: 0.02
+        value: 0.1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -283,7 +274,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Time
-    path: Capsule/Trail
+    path: Baguette/Trail
     classID: 96
     script: {fileID: 0}
   - curve:
@@ -311,8 +302,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Enabled
-    path: WhipBlade
-    classID: 136
+    path: Baguette
+    classID: 65
     script: {fileID: 0}
   m_PPtrCurves: []
   m_SampleRate: 60
@@ -1297,17 +1288,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.38333333
-        value: 0.1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 0.4
-        value: 0.02
+        value: 0.1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1318,7 +1300,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Time
-    path: Capsule/Trail
+    path: Baguette/Trail
     classID: 96
     script: {fileID: 0}
   - curve:
@@ -1346,8 +1328,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Enabled
-    path: WhipBlade
-    classID: 136
+    path: Baguette
+    classID: 65
     script: {fileID: 0}
   m_EulerEditorCurves:
   - curve:
