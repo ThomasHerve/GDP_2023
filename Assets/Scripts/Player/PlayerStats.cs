@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,10 +12,11 @@ public static class PlayerStats
     public const int RESISTANCE_BASE = 0;
     public const int DAMAGE_BASE = 10;
     public const int THROWFORCE_BASE = 10;
-    public const int BOTTLECD_BASE = 2;
+    public const int BOTTLECD_BASE = 10;
     public const int BOTTLEDAMAGE_BASE = 10;
     public const int BOTTLEDAMAGERADIUS_BASE = 3;
     public const int BOTTLESLOW_BASE = 0;
+    public const int LIFESTEAL_BASE = 0;
 
     //Player upgrades : To configure
     static public int hpMaxAugment = 10;
@@ -25,6 +27,7 @@ public static class PlayerStats
     static public int bottleDamageAugment = 10;
     static public int bottleDamageRadiusAugment = 1;
     static public int bottleSlowAugment = 2;
+    static public int lifestealAugment = 1;
 
     //Player stats
     static private int _experience = 0;
@@ -41,7 +44,7 @@ public static class PlayerStats
     static public int bottleDamage = BOTTLEDAMAGE_BASE;
     static public int bottleDamageRadius = BOTTLEDAMAGERADIUS_BASE;
     static public int bottleSlow = BOTTLESLOW_BASE;
-
+    static public int lifesteal = LIFESTEAL_BASE;
 
     // Properties for updates
     static public int hp { get { return _hp; } set { _hp = value; gameManager.UpdateHealthBar(); } }
@@ -57,12 +60,36 @@ public static class PlayerStats
         hpMax,
         resistance,
         damage,
-        throwForce,
-        bottleCd,
-        bottleDamage,
-        bottleDamageRadius,
-        bottleSlow
+        bottleSlow,
+        lifesteal
     }
+
+    public static Dictionary<UpgradableStats, int> upgrades = new Dictionary<UpgradableStats, int>()
+    {
+        {UpgradableStats.hpMax, hpMaxAugment},
+        {UpgradableStats.resistance, resistanceAugment},
+        {UpgradableStats.damage, damageAugment},
+        {UpgradableStats.bottleSlow, bottleSlowAugment},
+        {UpgradableStats.lifesteal , lifestealAugment}
+    };
+
+    public static Dictionary<UpgradableStats, Action> ApplyAugment = new Dictionary<UpgradableStats, Action>() {
+        {UpgradableStats.hpMax, ()=>{
+            hpMax += hpMaxAugment;
+        }},
+        {UpgradableStats.resistance, ()=>{
+            resistance += resistanceAugment;
+        }},
+        {UpgradableStats.damage, ()=>{
+            damage += damageAugment;
+        }},
+        {UpgradableStats.bottleSlow, ()=>{
+            bottleSlow += bottleSlowAugment;
+        }},
+        {UpgradableStats.lifesteal , ()=>{
+            lifesteal += lifestealAugment;
+        }}
+    };
 
     static public void Reset()
     {
@@ -93,6 +120,11 @@ public static class PlayerStats
         level +=1;
         experience = overlapXP;
         gameManager.updateExpBarMax();
+    }
+
+    static public void Lifesteal()
+    {
+        hp = Mathf.Min(hpMax, hp + lifesteal);
     }
 
     static public void TakeDamage(int baseDmg)

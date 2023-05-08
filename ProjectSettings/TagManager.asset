@@ -11,6 +11,9 @@ TagManager:
   - LeftHand
   - Sauce
   - Bottle
+  - VirtualCamera
+  - XP
+  - fish
   layers:
   - Default
   - TransparentFX

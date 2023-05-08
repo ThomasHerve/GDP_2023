@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static System.Math;
 using TMPro;
 
 public class GameLoop : MonoBehaviour
 {
-    PlayerController player;
+    PlayerController playerController;
     float FIRSTSPAWNTIME = 1;
     [SerializeField]
     static float SPAWNTIME = 3;
@@ -16,13 +17,21 @@ public class GameLoop : MonoBehaviour
     int initialEnemyWave;
     int nbUnlockedEnemyTypes;
     public static int nbEnemyType = 5;
-    
+
+    float timeInGame;
     float TIMETOWIN = SPAWNTIME * (nbEnemyType + 1);
     float lastSpawn;
+    [Header("Player")]
+    [SerializeField]
+    private GameObject player;
 
     [Header("Liens LevelUpPanel")]
     [SerializeField]
     private GameObject startText;
+    [SerializeField]
+    private GameObject victory;
+    [SerializeField]
+    private GameObject defeat;
 
     [Header("Hugo")]
     [SerializeField]
@@ -32,13 +41,15 @@ public class GameLoop : MonoBehaviour
    
     private void Start()
     {
+        lastSpawn = SPAWNTIME;
+        playerController = player.GetComponent<PlayerController>();
         // curve.Evaluate();
         nbUnlockedEnemyTypes = 0;
         // nbEnemySpawn = initialEnnemyWave;
         lastSpawn = FIRSTSPAWNTIME;
         time.text = numberOfSecondsToDisplayableString(0f);
         time.color = new Color(1f, 1f, 0f, 0.2f);
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        playerController = player.GetComponent<PlayerController>();
     }
 
     State state = State.WAITING_TO_START;
@@ -59,14 +70,13 @@ public class GameLoop : MonoBehaviour
                 break;
             case State.START:
                 // Set all needed variables
-                player.Reset();
-
+                playerController.Reset();
                 state = State.RUNNING;
                 break;
             case State.RUNNING:
                 double gameProgressionRate = ((double)(nbUnlockedEnemyTypes)) / ((double)nbEnemyType);
-                Debug.Log(gameProgressionRate.ToString());
                 lastSpawn -= Time.deltaTime;
+                timeInGame += Time.deltaTime;
                 if (lastSpawn <= 0)
                 {
                     time.color = new Color(
@@ -82,7 +92,7 @@ public class GameLoop : MonoBehaviour
                     if (nbEnemyToSpawn > 0) GetComponent<WaveManager>().SpawnWave(nbEnemyToSpawn, nbUnlockedEnemyTypes);
                     lastSpawn = SPAWNTIME;
                 }
-                time.text = numberOfSecondsToDisplayableString(Time.fixedTime);
+                time.text = numberOfSecondsToDisplayableString(timeInGame);
                 break;
             case State.END:
                 // Manage end of the game
@@ -104,9 +114,11 @@ public class GameLoop : MonoBehaviour
         nbUnlockedEnemyTypes = 0;
         time.text = numberOfSecondsToDisplayableString(TIMETOWIN);
         time.color = new Color(1f, 1f, 0f, 0.2f);
+        Instantiate(player, Vector3.zero, Quaternion.identity);
+        timeInGame = 0f;
     }
 
-    public void EndGame()
+    public void EndGame(bool win)
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         for (int i = 0; i < enemies.Length; i++)
@@ -114,6 +126,20 @@ public class GameLoop : MonoBehaviour
             enemies[i].GetComponent<Ennemy>().Freeze();
         }
         state = State.END;
+        if(win)
+        {
+            victory.SetActive(true);
+        } else
+        {
+            defeat.SetActive(true);
+        }
+    }
+
+    public void Replay()
+    {
+        victory.SetActive(false);
+        defeat.SetActive(false);
+        state = State.WAITING_TO_START;
     }
 
     private string numberOfSecondsToDisplayableString(float time)

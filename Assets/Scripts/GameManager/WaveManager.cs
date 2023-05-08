@@ -34,7 +34,6 @@ public class WaveManager : MonoBehaviour
     public void SpawnWave(int nbEnemyToSpawn, int nbUnlockedEnemyTypes)
     {
         Debug.Log(nbUnlockedEnemyTypes.ToString());
-        Debug.Log(enemyType.Length.ToString());
         Instantiate(enemyType[nbUnlockedEnemyTypes - 1], GetCoordinates(), Quaternion.identity);
         // Spawn grâce à l'instantiation en boucle de "enemy" qui pointe sur le GameObject enemy
         for (int i = 0; i < nbEnemyToSpawn - 1; i++)
