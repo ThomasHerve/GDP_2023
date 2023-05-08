@@ -32,7 +32,7 @@ public class ArtefactUI : MonoBehaviour
 
     public void Validate(int restant)
     {
-        textMeshProUGUI.text = text2;
+        textMeshProUGUI.text = text2 + restant;
         StartCoroutine(EffectCoroutine());
     }
 
@@ -42,7 +42,7 @@ public class ArtefactUI : MonoBehaviour
         while(currentTime < time)
         {
             currentTime += Time.deltaTime;
-            textMeshProUGUI.color = new Color(textColor.r, textColor.g, textColor.b, 255 * (time - currentTime )/ time);
+            textMeshProUGUI.color = new Color(textColor.r, textColor.g, textColor.b, ((time - currentTime )/ time));
             yield return null;
         }
 
