@@ -758,7 +758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857d9621803d1b54486c940c3e0ea4e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
+  hp: 20
   damage: 4
   numberXP: 5
   valueXP: 1
@@ -773,6 +773,7 @@ MonoBehaviour:
   effectsClip: []
   effectCoolDown: 60
   damageTime: 1
+  isBoss: 0
 --- !u!195 &6482537499177052160
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -243,13 +243,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857d9621803d1b54486c940c3e0ea4e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
-  damage: 4
-  numberXP: 5
-  valueXP: 1
+  hp: 45
+  damage: 7
+  numberXP: 6
+  valueXP: 3
   particles: {fileID: 4665408664960222323, guid: 17af93a880ef3a446a4effafbf8d626d, type: 3}
   knockbackForce: 50
+  voiceSource: {fileID: 0}
+  voicesClip: []
+  voiceCoolDown: 60
+  effectSource: {fileID: 0}
+  effectsClip: []
+  effectCoolDown: 2
   damageTime: 1
+  isBoss: 0
 --- !u!195 &-3818584348792448819
 NavMeshAgent:
   m_ObjectHideFlags: 0
