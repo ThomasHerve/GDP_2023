@@ -22,6 +22,21 @@ public class Ennemy : MonoBehaviour
     [SerializeField]
     float knockbackForce = 20f;
 
+    //Sounds
+    [SerializeField]
+    AudioSource voiceSource;
+    [SerializeField]
+    AudioClip[] voicesClip;
+    [SerializeField]
+    private float voiceCoolDown = 60f;
+
+    [SerializeField]
+    AudioSource effectSource;
+    [SerializeField]
+    AudioClip[] effectsClip;
+    [SerializeField]
+    private float effectCoolDown = 2f;
+
     private NavMeshAgent navMeshAgent;
     private GameObject player;
     private PlayerController playerController;
@@ -29,6 +44,10 @@ public class Ennemy : MonoBehaviour
     // Damages
     [SerializeField]
     private float damageTime;
+
+    [SerializeField]
+    private bool isBoss;
+
     private float currentDamageTime = 0;
     private bool isCollided = false;
 
@@ -45,6 +64,8 @@ public class Ennemy : MonoBehaviour
     // Pause
     private bool pauseTriggered = false;
 
+    private float voiceCd;
+    private float effectCd;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +73,9 @@ public class Ennemy : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerController = player.GetComponent<PlayerController>();
+        voiceCd = voiceCoolDown;
+        effectCd = effectCoolDown;
+
     }
 
     // Update is called once per frame
@@ -90,6 +114,24 @@ public class Ennemy : MonoBehaviour
             }
         }
 
+        if (voicesClip.Length > 0)
+        {
+            voiceCd -= Time.deltaTime;
+            if (voiceCd <= 0)
+            {
+                voiceSource.PlayOneShot(voicesClip[Random.Range(0, voicesClip.Length)]);
+                voiceCd = voiceCoolDown;
+            }
+        }
+        if (effectsClip.Length>0)
+        {
+            effectCd -= Time.deltaTime;
+            if (effectCd <= 0)
+            {
+                effectSource.PlayOneShot(effectsClip[Random.Range(0, effectsClip.Length)]);
+                effectCd = effectCoolDown;
+            }
+        }
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -125,6 +167,10 @@ public class Ennemy : MonoBehaviour
             GetComponent<Animation>().Play("SimpleDeath");
             var xp = Instantiate(particles, transform.position, Quaternion.identity);
             xp.GetComponent<XP>().Launch(numberXP, valueXP);
+            if(isBoss)
+            {
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<GameLoop>().EndGame(true);
+            }
             Destroy(gameObject, 2);
         }
     }

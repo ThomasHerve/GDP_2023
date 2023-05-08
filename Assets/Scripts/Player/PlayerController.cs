@@ -30,6 +30,20 @@ public class PlayerController : MonoBehaviour
     AudioSource whipSource;
     [SerializeField]
     AudioClip whipClip;
+    [SerializeField]
+    AudioSource voiceSource;
+    [SerializeField]
+    AudioClip[] attackClip;
+    [SerializeField]
+    AudioClip[] bottleClip;
+    [SerializeField]
+    AudioClip[] idleClip;
+    [SerializeField]
+    AudioClip[] levelUpClip;
+    [SerializeField]
+    AudioClip[] deathClip;
+    [SerializeField]
+    AudioClip[] hitClip;
 
     // Velocity management
     private Vector3 targetVelocity;
@@ -50,11 +64,15 @@ public class PlayerController : MonoBehaviour
     private bool isMoving = false;
     private float footStepTimer = 0f;
     private float whipCd = 0f;
-
+    private float talkInThisManyFrames;
+    static private System.Random rng;
 
     // Start is called before the first frame update
     void Start()
     {
+        rng = new System.Random();
+        talkInThisManyFrames = rng.Next(1, 2);
+
         rigidbody = GetComponent<Rigidbody>();
         m_Plane = new Plane(Vector3.up, Vector3.zero);
         gameLoop = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameLoop>();
@@ -88,6 +106,13 @@ public class PlayerController : MonoBehaviour
             return;
         if (PlayerStats.hp > 0)
         {
+            talkInThisManyFrames -= Time.deltaTime;
+            if (talkInThisManyFrames <= 0)
+            {
+                voiceSource.PlayOneShot(idleClip[Random.Range(0, idleClip.Length)]);
+                talkInThisManyFrames = rng.Next(2, 10);
+            }
+
             currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * acceleration);
             rigidbody.velocity = currentVelocity;
 
@@ -176,15 +201,21 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamages(int damages)
     {
-        if(PlayerStats.hp > 0)
+        voiceSource.PlayOneShot(hitClip[Random.Range(0, hitClip.Length)]);
+        if (PlayerStats.hp > 0)
         {
             PlayerStats.TakeDamage(damages);
             if (PlayerStats.hp <= 0)
             {
                 gameLoop.EndGame(false);
-                StartCoroutine(deathCoroutine());
+                Die();
             }
         }
+    }
+
+    public void Die()
+    {
+        StartCoroutine(deathCoroutine());
     }
 
     public void Reset()
@@ -196,6 +227,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator deathCoroutine()
     {
+        voiceSource.PlayOneShot(deathClip[Random.Range(0, deathClip.Length)]);
         float currentDeathAnimationTime = 0;
         while(currentDeathAnimationTime < deathAnimationTime)
         {
@@ -231,7 +263,7 @@ public class PlayerController : MonoBehaviour
         double randNormal = 1 + standardDeviation * randStdNormal; //random normal(mean,stdDev^2)
         whipSource.pitch = (float)randNormal;
         whipSource.PlayOneShot(whipClip);
-
+        voiceSource.PlayOneShot(attackClip[Random.Range(0, attackClip.Length)]);
     }
 
     public void ThrowBottle()
@@ -239,9 +271,13 @@ public class PlayerController : MonoBehaviour
         if (PlayerStats.isBottleUp)
         {
             transform.Find("LeftHand").GetComponent<Animation>().Play();
+            voiceSource.PlayOneShot(bottleClip[Random.Range(0, bottleClip.Length)]);
         }
 
     }
 
-
+    public void PlayLevelUpSound()
+    {
+        voiceSource.PlayOneShot(levelUpClip[Random.Range(0, levelUpClip.Length)]);
+    }
 }

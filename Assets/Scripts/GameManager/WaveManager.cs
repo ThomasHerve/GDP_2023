@@ -12,7 +12,7 @@ public class WaveManager : MonoBehaviour
     private static System.Random rng;
     public 
 
-    Vector3 boxSize = new Vector3(3,3,3);
+    Vector3 boxSize = new Vector3(1.5f,1.5f,1.5f);
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +50,7 @@ public class WaveManager : MonoBehaviour
         Vector3 pos = Vector3.zero;
         bool found = false;
         var count = 0;
-        while(!found && count < 10)
+        while(!found && count < 100)
         {
             count++;
             found = true;
@@ -75,6 +75,9 @@ public class WaveManager : MonoBehaviour
             if (colliders.Length != 1)
             {
                 found = false;
+            } else if (colliders[0].gameObject.tag != "Plane")
+            {
+                found=false;
             }
         }
         return pos;

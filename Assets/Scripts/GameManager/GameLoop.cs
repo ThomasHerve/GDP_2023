@@ -10,7 +10,8 @@ public class GameLoop : MonoBehaviour
     PlayerController playerController;
     float FIRSTSPAWNTIME = 1;
     [SerializeField]
-    static float SPAWNTIME = 3;
+    static float SPAWNTIME = 20;
+    static float SUB_SPAWNTIME = 5;
     [SerializeField]
     int maxEnemy = 50;
     [SerializeField]
@@ -22,6 +23,7 @@ public class GameLoop : MonoBehaviour
     float timeInGame;
     float TIMETOBOSS = SPAWNTIME * (nbEnemyType + 2);
     float lastSpawn;
+    float lastSubSPawn;
     [Header("Player")]
     [SerializeField]
     private GameObject player;
@@ -39,7 +41,11 @@ public class GameLoop : MonoBehaviour
     private AnimationCurve nbEnemiesToSpawnUnconstrained;
     [SerializeField]
     private TextMeshProUGUI time;
-   
+    [SerializeField]
+    private GameObject[] Artefacts;
+    private int index = 0;
+    private bool spawnArtefact = true;
+    private bool bossSpawned = false;
     private void Start()
     {
         playerController = player.GetComponent<PlayerController>();
@@ -73,8 +79,22 @@ public class GameLoop : MonoBehaviour
                 state = State.RUNNING;
                 break;
             case State.RUNNING:
+                // Artefacts
+                if(spawnArtefact)
+                {
+                    if(nbUnlockedEnemyTypes - 2 >= index && Artefacts[index] != null && !Artefacts[index].activeSelf)
+                    {
+                        Artefacts[index].SetActive(true);
+                        Artefacts[index].GetComponent<Artefact>().restant = 2 - (nbUnlockedEnemyTypes - 2);
+                        spawnArtefact = false;
+                        if(index < 2)
+                            index++;
+                    }
+                }
+
                 double gameProgressionRate = ((double)(nbUnlockedEnemyTypes)) / ((double)nbEnemyType + 1);
                 lastSpawn -= Time.deltaTime;
+                lastSubSPawn -= Time.deltaTime;
                 timeInGame += Time.deltaTime;
                 if (lastSpawn <= 0)
                 {
@@ -91,6 +111,16 @@ public class GameLoop : MonoBehaviour
                     {
                         if (timeInGame >= TIMETOBOSS)
                         {
+                            if(!spawnArtefact)
+                            {
+                                // We lose
+                                EndGame(false);
+                                PlayerStats.hp = 0;
+                                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().Die();
+                                time.text = "Vous n'avez pas collecté les artefacts à temps";
+                                time.color = Color.red;
+                                return;
+                            }
                             bossUnlocked = true;
                             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
                             foreach (GameObject enemy in enemies)
@@ -98,6 +128,7 @@ public class GameLoop : MonoBehaviour
                                 Destroy(enemy, 0f);
                             }
                             GetComponent<WaveManager>().SpawnBoss(nbUnlockedEnemyTypes);
+                            bossSpawned = true;
                         }
                         else
                         {
@@ -110,11 +141,18 @@ public class GameLoop : MonoBehaviour
                         int nbEnemyToSpawn = Mathf.Min(nbEnemyToSpawnUnconstrained, Mathf.Max(0, maxEnemy - GameObject.FindGameObjectsWithTag("Enemy").Length));
                         if (nbEnemyToSpawn > 0) GetComponent<WaveManager>().SpawnWave(nbEnemyToSpawn, nbUnlockedEnemyTypes);
                         lastSpawn = SPAWNTIME;
+                        lastSubSPawn = SUB_SPAWNTIME;
                     }
                     else {
                         Debug.Log("Here doing nothing else than printing this is normal: nothing spawns after the B0$$!");
                     }
 
+                } else if(lastSubSPawn <= 0 && nbUnlockedEnemyTypes >= 1 && !bossSpawned)
+                {
+                    int nbEnemyToSpawnUnconstrained = initialEnemyWave + maxEnemy * (int)System.Math.Floor(nbEnemiesToSpawnUnconstrained.Evaluate((float)gameProgressionRate));
+                    int nbEnemyToSpawn = Mathf.Min(nbEnemyToSpawnUnconstrained, Mathf.Max(0, maxEnemy - GameObject.FindGameObjectsWithTag("Enemy").Length));
+                    if (nbEnemyToSpawn > 0) GetComponent<WaveManager>().SpawnWave(nbEnemyToSpawn, nbUnlockedEnemyTypes);
+                    lastSubSPawn = SUB_SPAWNTIME;
                 }
 
                 if (!bossUnlocked)
@@ -163,6 +201,8 @@ public class GameLoop : MonoBehaviour
         state = State.END;
         if(win)
         {
+            Destroy(GameObject.FindGameObjectWithTag("Player"));
+            time.text = "";
             victory.SetActive(true);
         } else
         {
@@ -172,6 +212,7 @@ public class GameLoop : MonoBehaviour
 
     public void Replay()
     {
+        time.text = "";
         victory.SetActive(false);
         defeat.SetActive(false);
         state = State.WAITING_TO_START;
@@ -193,6 +234,11 @@ public class GameLoop : MonoBehaviour
             }
 
         }
+    }
+
+    public void GetArtefact()
+    {
+        spawnArtefact = true;
     }
 
     private string numberOfSecondsToDisplayableString(float time)

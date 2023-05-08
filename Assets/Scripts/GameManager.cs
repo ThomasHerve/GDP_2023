@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
             PlayerStats.LevelUp();
             upgradeManager.buildUpgrades();
             LevelUpPanel.SetActive(true);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().PlayLevelUpSound();
         }
 
         if (isPaused)
