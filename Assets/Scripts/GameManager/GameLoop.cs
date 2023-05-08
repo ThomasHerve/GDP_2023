@@ -46,6 +46,12 @@ public class GameLoop : MonoBehaviour
     private int index = 0;
     private bool spawnArtefact = true;
     private bool bossSpawned = false;
+    private GameObject previousArtefact = null;
+
+
+    [SerializeField]
+    AudioClip gongClip;
+
     private void Start()
     {
         playerController = player.GetComponent<PlayerController>();
@@ -117,7 +123,7 @@ public class GameLoop : MonoBehaviour
                                 EndGame(false);
                                 PlayerStats.hp = 0;
                                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().Die();
-                                time.text = "Vous n'avez pas collecté les artefacts à temps";
+                                time.text = "Vous n'avez pas collectï¿½ les artefacts ï¿½ temps";
                                 time.color = Color.red;
                                 return;
                             }
@@ -189,6 +195,7 @@ public class GameLoop : MonoBehaviour
         time.color = new Color(0f, 1f, 0f, 0.1f);
         Instantiate(player, Vector3.zero, Quaternion.identity);
         timeInGame = 0f;
+        PlayerStats.gameManager.PlayGlobalSfx(gongClip);
     }
 
     public void EndGame(bool win)

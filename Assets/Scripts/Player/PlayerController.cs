@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
     private float talkInThisManyFrames;
     static private System.Random rng;
 
+
     // Start is called before the first frame update
     void Start()
     {
