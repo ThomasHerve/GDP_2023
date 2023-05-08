@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
             if (talkInThisManyFrames <= 0)
             {
                 voiceSource.PlayOneShot(idleClip[Random.Range(0, idleClip.Length)]);
-                talkInThisManyFrames = rng.Next(2, 10);
+                talkInThisManyFrames = rng.Next(4, 16);
             }
 
             currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * acceleration);

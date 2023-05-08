@@ -73,8 +73,8 @@ public class Ennemy : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerController = player.GetComponent<PlayerController>();
-        voiceCd = voiceCoolDown;
-        effectCd = effectCoolDown;
+        voiceCd = Random.Range(10,voiceCoolDown) ;
+        effectCd = Random.Range(10,effectCoolDown);
 
     }
 
@@ -120,7 +120,7 @@ public class Ennemy : MonoBehaviour
             if (voiceCd <= 0)
             {
                 voiceSource.PlayOneShot(voicesClip[Random.Range(0, voicesClip.Length)]);
-                voiceCd = voiceCoolDown;
+                voiceCd = Random.Range(10,voiceCoolDown);
             }
         }
         if (effectsClip.Length>0)
@@ -129,7 +129,7 @@ public class Ennemy : MonoBehaviour
             if (effectCd <= 0)
             {
                 effectSource.PlayOneShot(effectsClip[Random.Range(0, effectsClip.Length)]);
-                effectCd = effectCoolDown;
+                effectCd = Random.Range(10,effectCoolDown);
             }
         }
     }

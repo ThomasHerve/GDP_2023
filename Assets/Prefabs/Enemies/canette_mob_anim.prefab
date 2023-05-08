@@ -190,7 +190,7 @@ MonoBehaviour:
   voicesClip:
   - {fileID: 8300000, guid: 505f92cde3961a44fab011817188282a, type: 3}
   - {fileID: 8300000, guid: d994b13404183fa4db79ec2f87c1d8e9, type: 3}
-  voiceCoolDown: 60
+  voiceCoolDown: 90
   effectSource: {fileID: 867807276}
   effectsClip: []
   effectCoolDown: 60

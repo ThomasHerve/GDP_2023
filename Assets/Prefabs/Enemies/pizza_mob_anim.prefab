@@ -668,7 +668,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 93750e479e71571478299442b4a83ef3, type: 3}
   - {fileID: 8300000, guid: ac7b02f440cdefb4cb376aa5ddbc27d8, type: 3}
   - {fileID: 8300000, guid: f115f063e13ba114aa916f27ef8c3718, type: 3}
-  voiceCoolDown: 60
+  voiceCoolDown: 90
   effectSource: {fileID: 1385143271}
   effectsClip: []
   effectCoolDown: 60
