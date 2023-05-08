@@ -1822,16 +1822,33 @@ MonoBehaviour:
   whipSource: {fileID: 939606008}
   whipClip: {fileID: 8300000, guid: 8cbcf282fabbd2e41b81ea79c672ce55, type: 3}
   voiceSource: {fileID: 1395033232}
-  attackClip: []
-  bottleClip: []
-  idleClip: []
+  attackClip:
+  - {fileID: 8300000, guid: 8a17431689b1ce04caef6aa5a8ffe917, type: 3}
+  - {fileID: 8300000, guid: 4cef2f3723a424747bc3a18f5cd4f48f, type: 3}
+  - {fileID: 8300000, guid: 5a14abf8acd84f542ae6c751af93aabb, type: 3}
+  - {fileID: 8300000, guid: ea2e4c9efc7aea646959c7907ca12fdf, type: 3}
+  - {fileID: 8300000, guid: f953b0c8ea218f74db88d18eb5b785a7, type: 3}
+  bottleClip:
+  - {fileID: 8300000, guid: 9944052ef94316f42b232262af48d638, type: 3}
+  - {fileID: 8300000, guid: 14eb30ac9426e364488a8b77de38b855, type: 3}
+  idleClip:
+  - {fileID: 8300000, guid: d9ad35085787c5e4aacca161040117eb, type: 3}
+  - {fileID: 8300000, guid: ff4fad0c4aa5c2f47a3ba8ea6eab39c3, type: 3}
+  - {fileID: 8300000, guid: 6ee19fdeb726d2244b1dab928cc7492d, type: 3}
+  - {fileID: 8300000, guid: 693fa98fa47396f48ae41099deb28382, type: 3}
   levelUpClip:
   - {fileID: 8300000, guid: e041821ec2277c342bd37f9298326410, type: 3}
   - {fileID: 8300000, guid: 0628d0920c1fbf04a96036820afdd974, type: 3}
   - {fileID: 8300000, guid: 0400a8ced39cd0849b44189c75da0814, type: 3}
   - {fileID: 8300000, guid: c8e97300c9b793842b0b45b97293c2f0, type: 3}
-  deathClip: []
-  hitClip: []
+  deathClip:
+  - {fileID: 8300000, guid: b556e13edef2db940aa12f363c160dc5, type: 3}
+  - {fileID: 8300000, guid: 5ce1a9740b5305d4ea56e5de8062a0cb, type: 3}
+  hitClip:
+  - {fileID: 8300000, guid: 1b8622c42c3871041adb6f7f3df60544, type: 3}
+  - {fileID: 8300000, guid: 725d71de44b20674ba20effcec75dbc8, type: 3}
+  - {fileID: 8300000, guid: 80e45d7fe3ace374283192f5c2d6f620, type: 3}
+  - {fileID: 8300000, guid: 8729afb0b881c404a90a99ca799ef67e, type: 3}
 --- !u!1001 &4631753871383079519
 PrefabInstance:
   m_ObjectHideFlags: 0
