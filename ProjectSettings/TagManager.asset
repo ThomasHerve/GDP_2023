@@ -15,6 +15,7 @@ TagManager:
   - XP
   - fish
   - Artefact
+  - ArtefactUI
   layers:
   - Default
   - TransparentFX
