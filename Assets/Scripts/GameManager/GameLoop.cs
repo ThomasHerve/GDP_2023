@@ -147,11 +147,11 @@ public class GameLoop : MonoBehaviour
                         Debug.Log("Here doing nothing else than printing this is normal: nothing spawns after the B0$$!");
                     }
 
-                } else if(lastSubSPawn <= 0 && nbUnlockedEnemyTypes >= 1 && !bossSpawned)
+                } if(lastSubSPawn <= 0 && nbUnlockedEnemyTypes >= 1 && !bossSpawned)
                 {
                     int nbEnemyToSpawnUnconstrained = initialEnemyWave + maxEnemy * (int)System.Math.Floor(nbEnemiesToSpawnUnconstrained.Evaluate((float)gameProgressionRate));
                     int nbEnemyToSpawn = Mathf.Min(nbEnemyToSpawnUnconstrained, Mathf.Max(0, maxEnemy - GameObject.FindGameObjectsWithTag("Enemy").Length));
-                    if (nbEnemyToSpawn > 0) GetComponent<WaveManager>().SpawnWave(nbEnemyToSpawn, nbUnlockedEnemyTypes);
+                    if (nbEnemyToSpawn > 0) GetComponent<WaveManager>().SpawnWave(nbEnemyToSpawn, Mathf.Min(nbUnlockedEnemyTypes, 4));
                     lastSubSPawn = SUB_SPAWNTIME;
                 }
 
