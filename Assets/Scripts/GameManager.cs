@@ -14,7 +14,9 @@ public class GameManager : MonoBehaviour
     GameObject LevelUpPanel;
     [SerializeField]
     UpgradeManager upgradeManager;
-    
+    [SerializeField]
+    AudioSource gameSFX;
+    [SerializeField]
     bool isPaused = true;
 
 
@@ -50,6 +52,10 @@ public class GameManager : MonoBehaviour
         
     }
 
+     public void PlayGlobalSfx(AudioClip audio)
+    {
+        gameSFX.PlayOneShot(audio);
+    }
 
     public void UpdateHealthBar()
     {
