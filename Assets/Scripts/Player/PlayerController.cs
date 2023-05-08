@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +19,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject deathParticleEffect;
 
+
+    [Header("Sounds")]
+    [SerializeField]
+    AudioSource footStepSource;
+    [SerializeField]
+    AudioClip[] footStepClips;
+    [SerializeField]
+    AudioSource whipSource;
+    [SerializeField]
+    AudioClip whipClip;
+
     // Velocity management
     private Vector3 targetVelocity;
     private Vector3 currentVelocity;
@@ -32,8 +45,11 @@ public class PlayerController : MonoBehaviour
     private float startYPosition;
 
     private Animator animator;
-    public float movementThreshold = 3f;
-    public bool isMoving = false;
+    private float movementThreshold = 3f;
+    private bool isMoving = false;
+    private float footStepTimer = 0f;
+    private float whipCd = 0f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -54,15 +70,30 @@ public class PlayerController : MonoBehaviour
         {
             currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * acceleration);
             rigidbody.velocity = currentVelocity;
-            if (!isMoving && rigidbody.velocity.magnitude > movementThreshold)
+
+            if (isMoving)
             {
-                isMoving = true;
-                animator.SetBool("isWalking", true);
+                if (rigidbody.velocity.magnitude < movementThreshold)
+                {
+                    isMoving = false;
+                    animator.SetBool("isWalking", false);
+                }
+
+                footStepTimer -= Time.deltaTime;
+                if(footStepTimer <= 0)
+                {
+                    footStepTimer = 0.4f;
+                    footStepSource.PlayOneShot(footStepClips[Random.Range(0, footStepClips.Length)]);
+                }
             }
-            if(isMoving && rigidbody.velocity.magnitude < movementThreshold)
+            else
             {
-                isMoving = false;
-                animator.SetBool("isWalking", false);
+                if (rigidbody.velocity.magnitude > movementThreshold)
+                {
+                    isMoving = true;
+                    animator.SetBool("isWalking", true);
+                }
+
             }
 
             if (mousePosition != null)
@@ -70,7 +101,10 @@ public class PlayerController : MonoBehaviour
                 ComputeRotateMouse();
             }
         }
-
+        if (whipCd > 0)
+        {
+            whipCd -= Time.deltaTime;
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -164,13 +198,27 @@ public class PlayerController : MonoBehaviour
 
     public void Hit()
     {
+        if (whipCd > 0)
+            return;
+        whipCd = 0.4f;
+
         transform.Find("RightHand").GetComponent<Animation>().Play();
+        double standardDeviation = 0.1;
+        double u1 = 1.0 - Random.Range(0,1f); //uniform(0,1] random doubles
+        double u2 = 1.0 - Random.Range(0, 1f);
+        double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2); //random normal(0,1)
+        double randNormal = 1 + standardDeviation * randStdNormal; //random normal(mean,stdDev^2)
+        whipSource.pitch = (float)randNormal;
+        whipSource.PlayOneShot(whipClip);
+
     }
 
     public void ThrowBottle()
     {
         if (PlayerStats.isBottleUp)
+        {
             transform.Find("LeftHand").GetComponent<Animation>().Play();
+        }
 
     }
 
