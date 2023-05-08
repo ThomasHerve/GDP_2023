@@ -10,7 +10,8 @@ public class GameLoop : MonoBehaviour
     PlayerController playerController;
     float FIRSTSPAWNTIME = 1;
     [SerializeField]
-    static float SPAWNTIME = 3;
+    static float SPAWNTIME = 30;
+    static float SUB_SPAWNTIME = 5;
     [SerializeField]
     int maxEnemy = 50;
     [SerializeField]
@@ -22,6 +23,7 @@ public class GameLoop : MonoBehaviour
     float timeInGame;
     float TIMETOBOSS = SPAWNTIME * (nbEnemyType + 2);
     float lastSpawn;
+    float lastSubSPawn;
     [Header("Player")]
     [SerializeField]
     private GameObject player;
@@ -39,6 +41,9 @@ public class GameLoop : MonoBehaviour
     private AnimationCurve nbEnemiesToSpawnUnconstrained;
     [SerializeField]
     private TextMeshProUGUI time;
+    [SerializeField]
+    private GameObject[] Artefacts;
+    private GameObject previousArtefact = null;
    
     private void Start()
     {
@@ -75,6 +80,7 @@ public class GameLoop : MonoBehaviour
             case State.RUNNING:
                 double gameProgressionRate = ((double)(nbUnlockedEnemyTypes)) / ((double)nbEnemyType + 1);
                 lastSpawn -= Time.deltaTime;
+                lastSubSPawn -= Time.deltaTime;
                 timeInGame += Time.deltaTime;
                 if (lastSpawn <= 0)
                 {
@@ -109,12 +115,23 @@ public class GameLoop : MonoBehaviour
                         int nbEnemyToSpawnUnconstrained = initialEnemyWave + maxEnemy * (int)System.Math.Floor(nbEnemiesToSpawnUnconstrained.Evaluate((float)gameProgressionRate));
                         int nbEnemyToSpawn = Mathf.Min(nbEnemyToSpawnUnconstrained, Mathf.Max(0, maxEnemy - GameObject.FindGameObjectsWithTag("Enemy").Length));
                         if (nbEnemyToSpawn > 0) GetComponent<WaveManager>().SpawnWave(nbEnemyToSpawn, nbUnlockedEnemyTypes);
+                        if(nbUnlockedEnemyTypes >= 2)
+                        {
+                            
+                        }
                         lastSpawn = SPAWNTIME;
+                        lastSubSPawn = SUB_SPAWNTIME;
                     }
                     else {
                         Debug.Log("Here doing nothing else than printing this is normal: nothing spawns after the B0$$!");
                     }
 
+                } else if(lastSubSPawn <= 0 && nbUnlockedEnemyTypes >= 1 && !bossUnlocked)
+                {
+                    int nbEnemyToSpawnUnconstrained = initialEnemyWave + maxEnemy * (int)System.Math.Floor(nbEnemiesToSpawnUnconstrained.Evaluate((float)gameProgressionRate));
+                    int nbEnemyToSpawn = Mathf.Min(nbEnemyToSpawnUnconstrained, Mathf.Max(0, maxEnemy - GameObject.FindGameObjectsWithTag("Enemy").Length));
+                    if (nbEnemyToSpawn > 0) GetComponent<WaveManager>().SpawnWave(nbEnemyToSpawn, nbUnlockedEnemyTypes);
+                    lastSubSPawn = SUB_SPAWNTIME;
                 }
 
                 if (!bossUnlocked)

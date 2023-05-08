@@ -75,6 +75,9 @@ public class WaveManager : MonoBehaviour
             if (colliders.Length != 1)
             {
                 found = false;
+            } else if (colliders[0].gameObject.tag != "Plane")
+            {
+                found=false;
             }
         }
         return pos;
