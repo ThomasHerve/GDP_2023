@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1601924572823027103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6667468822044750616}
+  - component: {fileID: 3414588934256453629}
+  - component: {fileID: 67170767920373891}
+  - component: {fileID: 1625629570955350616}
+  m_Layer: 0
+  m_Name: GameManagerBackupThomas
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6667468822044750616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601924572823027103}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.1823592, y: 2.6264603, z: -0.032928407}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3414588934256453629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601924572823027103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed2fc2ee3e24ed64ea97865a7bdd0fa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthBar: {fileID: 0}
+  ExpBar: {fileID: 0}
+  LevelUpPanel: {fileID: 0}
+  upgradeManager: {fileID: 0}
+--- !u!114 &67170767920373891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601924572823027103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c21de78f37e2d4e49ad9109f63b956c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SPAWNTIME: 5
+  maxEnemy: 20
+  initialEnnemyWave: 5
+  player: {fileID: 5514132499167211014, guid: 90bbe796e296e364db8d6949c38d83c8, type: 3}
+  startText: {fileID: 0}
+  victory: {fileID: 0}
+  defeat: {fileID: 0}
+  fish: {fileID: 0}
+--- !u!114 &1625629570955350616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601924572823027103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0dc530fed5c5944c8574d763e35ea78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceSpawn: 20
+  enemy: {fileID: 6869507943456372070, guid: 03f02d5e411aabd4891349ece3b0b7d1, type: 3}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameLoop : MonoBehaviour
 {
@@ -52,7 +53,6 @@ public class GameLoop : MonoBehaviour
             case State.START:
                 // Set all needed variables
                 playerController.Reset();
-
                 state = State.RUNNING;
                 break;
             case State.RUNNING:

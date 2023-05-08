@@ -13,6 +13,7 @@ TagManager:
   - Bottle
   - VirtualCamera
   - XP
+  - fish
   layers:
   - Default
   - TransparentFX

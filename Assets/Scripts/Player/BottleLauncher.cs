@@ -1,27 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BottleLauncher : MonoBehaviour
 {
-    float bottleCount = 0;
+    private Image fish;
+
+    public float bottleCount = 0;
     GameObject bottle;
 
     void Start(){
+        fish = GameObject.FindGameObjectWithTag("fish").GetComponent<Image>();
         bottle = transform.Find("Bottle").gameObject;
     }
 
     private void Update()
     {
         if (PlayerStats.isBottleUp)
+        {
+            fish.fillAmount = 1;
             return;
+        }
 
         bottleCount += Time.deltaTime;
+        fish.fillAmount = Mathf.Min(1, bottleCount / Mathf.Max(PlayerStats.bottleCd, 2));
         if (bottleCount >= Mathf.Max(PlayerStats.bottleCd, 2))
         {
             ResetBottle();
             bottleCount = 0;
         }
+
+        
     }
 
     public void ResetBottle() {
