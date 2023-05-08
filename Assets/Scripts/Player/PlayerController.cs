@@ -30,6 +30,20 @@ public class PlayerController : MonoBehaviour
     AudioSource whipSource;
     [SerializeField]
     AudioClip whipClip;
+    [SerializeField]
+    AudioSource voiceSource;
+    [SerializeField]
+    AudioClip[] attackClip;
+    [SerializeField]
+    AudioClip[] bottleClip;
+    [SerializeField]
+    AudioClip[] idleClip;
+    [SerializeField]
+    AudioClip[] levelUpClip;
+    [SerializeField]
+    AudioClip[] deathClip;
+    [SerializeField]
+    AudioClip[] hitClip;
 
     // Velocity management
     private Vector3 targetVelocity;
@@ -243,5 +257,8 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
+    public void PlayLevelUpSound()
+    {
+        voiceSource.PlayOneShot(levelUpClip[Random.Range(0, levelUpClip.Length)]);
+    }
 }
