@@ -661,6 +661,7 @@ MonoBehaviour:
   particles: {fileID: 4665408664960222323, guid: 17af93a880ef3a446a4effafbf8d626d, type: 3}
   knockbackForce: 50
   damageTime: 1
+  isBoss: 1
 --- !u!195 &-3698984882748944526
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -15,11 +15,14 @@ public class Artefact : MonoBehaviour
 
     Vector3 originalPosition;
 
+    GameLoop gameLoop;
+
     // Start is called before the first frame update
     void Start()
     {
         originalPosition = transform.position;
         artefactUI = GameObject.FindGameObjectWithTag("ArtefactUI").GetComponent<ArtefactUI>();
+        gameLoop = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameLoop>();
         artefactUI.Use();
     }
 
@@ -40,6 +43,7 @@ public class Artefact : MonoBehaviour
         // CODE
         artefactUI.Validate(restant);
         Debug.Log("Artefact");
+        gameLoop.GetArtefact();
         Destroy(gameObject);
     }
 }

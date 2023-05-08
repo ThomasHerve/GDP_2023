@@ -196,9 +196,14 @@ public class PlayerController : MonoBehaviour
             if (PlayerStats.hp <= 0)
             {
                 gameLoop.EndGame(false);
-                StartCoroutine(deathCoroutine());
+                Die();
             }
         }
+    }
+
+    public void Die()
+    {
+        StartCoroutine(deathCoroutine());
     }
 
     public void Reset()

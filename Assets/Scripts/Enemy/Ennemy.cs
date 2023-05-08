@@ -29,6 +29,10 @@ public class Ennemy : MonoBehaviour
     // Damages
     [SerializeField]
     private float damageTime;
+
+    [SerializeField]
+    private bool isBoss;
+
     private float currentDamageTime = 0;
     private bool isCollided = false;
 
@@ -125,6 +129,10 @@ public class Ennemy : MonoBehaviour
             GetComponent<Animation>().Play("SimpleDeath");
             var xp = Instantiate(particles, transform.position, Quaternion.identity);
             xp.GetComponent<XP>().Launch(numberXP, valueXP);
+            if(isBoss)
+            {
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<GameLoop>().EndGame(true);
+            }
             Destroy(gameObject, 2);
         }
     }
