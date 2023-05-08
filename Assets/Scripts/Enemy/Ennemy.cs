@@ -142,7 +142,10 @@ public class Ennemy : MonoBehaviour
     {
         Vector3 knockbackDirection = transform.forward * -1f;
         GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
-        
+
+        // Lifesteal
+        PlayerStats.Lifesteal();
+
         hp -= dmg;
         if (hp < 0)
             Die();
