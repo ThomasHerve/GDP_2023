@@ -175,6 +175,24 @@ public class GameLoop : MonoBehaviour
         victory.SetActive(false);
         defeat.SetActive(false);
         state = State.WAITING_TO_START;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Destroy(enemies[i]);
+        }
+        GameObject[] xp = GameObject.FindGameObjectsWithTag("XP");
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            try
+            {
+                Destroy(xp[i]);
+            }
+            catch
+            {
+
+            }
+
+        }
     }
 
     private string numberOfSecondsToDisplayableString(float time)
