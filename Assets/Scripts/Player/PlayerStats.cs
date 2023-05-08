@@ -16,7 +16,7 @@ public static class PlayerStats
     public const int BOTTLEDAMAGE_BASE = 10;
     public const int BOTTLEDAMAGERADIUS_BASE = 3;
     public const int BOTTLESLOW_BASE = 0;
-    public const int LIFESTEAL_BASE = 0;
+    public const int LIFESTEAL_BASE = 1;
 
     //Player upgrades : To configure
     static public int hpMaxAugment = 10;
@@ -27,7 +27,7 @@ public static class PlayerStats
     static public int bottleDamageAugment = 10;
     static public int bottleDamageRadiusAugment = 1;
     static public int bottleSlowAugment = 2;
-    static public int lifestealAugment = 1;
+    static public int lifestealAugment = 2;
 
     //Player stats
     static private int _experience = 0;

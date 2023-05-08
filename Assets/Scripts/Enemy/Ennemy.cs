@@ -119,6 +119,8 @@ public class Ennemy : MonoBehaviour
     {
         if(!dead)
         {
+            // Lifesteal
+            PlayerStats.Lifesteal();
             dead = true;
             GetComponent<Animation>().Play("SimpleDeath");
             var xp = Instantiate(particles, transform.position, Quaternion.identity);
@@ -142,9 +144,6 @@ public class Ennemy : MonoBehaviour
     {
         Vector3 knockbackDirection = transform.forward * -1f;
         GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
-
-        // Lifesteal
-        PlayerStats.Lifesteal();
 
         hp -= dmg;
         if (hp < 0)
