@@ -811,7 +811,6 @@ Transform:
   m_Children:
   - {fileID: 1540796306}
   - {fileID: 755207116}
-  - {fileID: 5174058616755705593}
   m_Father: {fileID: 5174058618252440764}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1345,7 +1344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 831b73e4216908f429ef8f00f1aace77, type: 3}
       propertyPath: m_Name
-      value: sushi_player_anim
+      value: sushi_player_anim Variant
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 831b73e4216908f429ef8f00f1aace77, type: 3}
       propertyPath: m_Layer
@@ -1573,72 +1572,6 @@ MonoBehaviour:
   deathParticleEffect: {fileID: 6127671011331895442, guid: b0e1468c613399a47b7111420b0cca78, type: 3}
   movementThreshold: 0.1
   isMoving: 0
---- !u!1001 &4631753872819925266
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1144808149}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: a857b1ca70ecb5a49825589127d5c7bb, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a857b1ca70ecb5a49825589127d5c7bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.0015520592
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a857b1ca70ecb5a49825589127d5c7bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0012650966
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a857b1ca70ecb5a49825589127d5c7bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.0006228846
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a857b1ca70ecb5a49825589127d5c7bb, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a857b1ca70ecb5a49825589127d5c7bb, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a857b1ca70ecb5a49825589127d5c7bb, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a857b1ca70ecb5a49825589127d5c7bb, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a857b1ca70ecb5a49825589127d5c7bb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a857b1ca70ecb5a49825589127d5c7bb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a857b1ca70ecb5a49825589127d5c7bb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: a857b1ca70ecb5a49825589127d5c7bb, type: 3}
-      propertyPath: m_Name
-      value: Soja
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: a857b1ca70ecb5a49825589127d5c7bb, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a857b1ca70ecb5a49825589127d5c7bb, type: 3}
---- !u!4 &5174058616755705593 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a857b1ca70ecb5a49825589127d5c7bb, type: 3}
-  m_PrefabInstance: {fileID: 4631753872819925266}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4631753872990988900
 PrefabInstance:
   m_ObjectHideFlags: 0

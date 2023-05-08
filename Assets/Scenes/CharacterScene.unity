@@ -123,11 +123,73 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: ba942ed6cbacc604b8d2189ed92f1180, type: 2}
+--- !u!4 &211660606 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1144808149, guid: 90bbe796e296e364db8d6949c38d83c8, type: 3}
+  m_PrefabInstance: {fileID: 4631753871701263692}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &390869847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5174058618252440764, guid: 90bbe796e296e364db8d6949c38d83c8, type: 3}
   m_PrefabInstance: {fileID: 4631753871701263692}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &790589203
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 211660606}
+    m_Modifications:
+    - target: {fileID: 7322209728934635502, guid: 817895e3603ad5940a4bebd6cba64a23, type: 3}
+      propertyPath: m_Name
+      value: Bottle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986683520330153300, guid: 817895e3603ad5940a4bebd6cba64a23, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986683520330153300, guid: 817895e3603ad5940a4bebd6cba64a23, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986683520330153300, guid: 817895e3603ad5940a4bebd6cba64a23, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986683520330153300, guid: 817895e3603ad5940a4bebd6cba64a23, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986683520330153300, guid: 817895e3603ad5940a4bebd6cba64a23, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.4771588
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986683520330153300, guid: 817895e3603ad5940a4bebd6cba64a23, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986683520330153300, guid: 817895e3603ad5940a4bebd6cba64a23, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986683520330153300, guid: 817895e3603ad5940a4bebd6cba64a23, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.87881714
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986683520330153300, guid: 817895e3603ad5940a4bebd6cba64a23, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986683520330153300, guid: 817895e3603ad5940a4bebd6cba64a23, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986683520330153300, guid: 817895e3603ad5940a4bebd6cba64a23, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 123
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 817895e3603ad5940a4bebd6cba64a23, type: 3}
 --- !u!1 &861256449
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,6 +788,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 755207115, guid: 90bbe796e296e364db8d6949c38d83c8, type: 3}
+      propertyPath: m_Name
+      value: Bottle_old
+      objectReference: {fileID: 0}
+    - target: {fileID: 755207115, guid: 90bbe796e296e364db8d6949c38d83c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5174058618252440764, guid: 90bbe796e296e364db8d6949c38d83c8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -769,6 +839,10 @@ PrefabInstance:
     - target: {fileID: 5174058618252440764, guid: 90bbe796e296e364db8d6949c38d83c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514132497408298051, guid: 90bbe796e296e364db8d6949c38d83c8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5514132499167211014, guid: 90bbe796e296e364db8d6949c38d83c8, type: 3}
       propertyPath: m_Name
