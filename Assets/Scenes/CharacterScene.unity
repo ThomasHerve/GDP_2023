@@ -900,10 +900,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1407467174, guid: 57403928cc55d204d9e1c10d349f95c4, type: 3}
-      propertyPath: m_TagString
-      value: fish
-      objectReference: {fileID: 0}
     - target: {fileID: 1540600881, guid: 57403928cc55d204d9e1c10d349f95c4, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
