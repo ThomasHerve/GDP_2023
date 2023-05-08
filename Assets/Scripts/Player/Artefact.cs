@@ -7,6 +7,9 @@ public class Artefact : MonoBehaviour
     [SerializeField]
     AnimationCurve curve;
 
+    [SerializeField]
+    AudioClip gongClip;
+
     ArtefactUI artefactUI;
     public int restant = 0;
 
@@ -42,6 +45,7 @@ public class Artefact : MonoBehaviour
     {
         // CODE
         artefactUI.Validate(restant);
+        PlayerStats.gameManager.PlayGlobalSfx(gongClip);
         Debug.Log("Artefact");
         gameLoop.GetArtefact();
         Destroy(gameObject);
