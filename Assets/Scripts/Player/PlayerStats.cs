@@ -64,14 +64,6 @@ public static class PlayerStats
         lifesteal
     }
 
-    public static Dictionary<UpgradableStats, string> names = new Dictionary<UpgradableStats, string>(){
-        {UpgradableStats.hpMax, "HP MAX"},
-        {UpgradableStats.resistance, "RESISTANCE"},
-        {UpgradableStats.damage, "DAMAGE"},
-        {UpgradableStats.bottleSlow, "BOTTLE SLOW"},
-        {UpgradableStats.lifesteal , "LIFESTEAL"}
-    };
-
     public static Dictionary<UpgradableStats, int> upgrades = new Dictionary<UpgradableStats, int>()
     {
         {UpgradableStats.hpMax, hpMaxAugment},

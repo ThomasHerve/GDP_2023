@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using static PlayerStats;
 
 public class UpgradeManager : MonoBehaviour
@@ -12,6 +10,16 @@ public class UpgradeManager : MonoBehaviour
     int[] upgrades = new int[3];
     UpgradableStats[] backups = new UpgradableStats[3];
 
+    [SerializeField]
+    Sprite[] sprites;
+
+    Dictionary<UpgradableStats, int> spriteIndices = new Dictionary<UpgradableStats, int>(){
+        {UpgradableStats.hpMax, 0},
+        {UpgradableStats.resistance, 1},
+        {UpgradableStats.damage, 2},
+        {UpgradableStats.bottleSlow, 3},
+        {UpgradableStats.lifesteal , 4}
+    };
     public void buildUpgrades()
     {
         PlayerStats.pause = true;
@@ -29,9 +37,9 @@ public class UpgradeManager : MonoBehaviour
         backups[0] = (UpgradableStats)upgrades[0];
         backups[1] = (UpgradableStats)upgrades[1];
         backups[2] = (UpgradableStats)upgrades[2];
-        panel.Find("ButtonA").GetComponentInChildren<TextMeshProUGUI>().text = PlayerStats.names[backups[0]];
-        panel.Find("ButtonB").GetComponentInChildren<TextMeshProUGUI>().text = PlayerStats.names[backups[1]];
-        panel.Find("ButtonC").GetComponentInChildren<TextMeshProUGUI>().text = PlayerStats.names[backups[2]];
+        panel.Find("ButtonA").GetComponent<Image>().sprite = sprites[spriteIndices[backups[0]]];
+        panel.Find("ButtonB").GetComponent<Image>().sprite = sprites[spriteIndices[backups[1]]];
+        panel.Find("ButtonC").GetComponent<Image>().sprite = sprites[spriteIndices[backups[2]]];
     }
 
     public void selectUpgrade(int upgrade)
