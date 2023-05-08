@@ -38,10 +38,13 @@ public class WaveManager : MonoBehaviour
         // Spawn grâce à l'instantiation en boucle de "enemy" qui pointe sur le GameObject enemy
         for (int i = 0; i < nbEnemyToSpawn - 1; i++)
         {
-            Instantiate(enemyType[rng.Next(0, nbUnlockedEnemyTypes - 1)], GetCoordinates(), Quaternion.identity);
+            Instantiate(enemyType[nbUnlockedEnemyTypes - 1], GetCoordinates(), Quaternion.identity); //rng.Next(0, nbUnlockedEnemyTypes - 1)
         }
     }
-
+    public void SpawnBoss(int nbUnlockedEnemyTypes)
+    {
+        Instantiate(enemyType[nbUnlockedEnemyTypes - 1], Vector3.zero, Quaternion.identity);
+    }
     public Vector3 GetCoordinates()
     {
         Vector3 pos = Vector3.zero;
