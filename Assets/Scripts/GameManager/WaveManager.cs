@@ -43,7 +43,7 @@ public class WaveManager : MonoBehaviour
     }
     public void SpawnBoss(int nbUnlockedEnemyTypes)
     {
-        Instantiate(enemyType[nbUnlockedEnemyTypes - 1], GetCoordinates(), Quaternion.identity);
+        Instantiate(enemyType[nbUnlockedEnemyTypes - 1], Vector3.zero, Quaternion.identity);
     }
     public Vector3 GetCoordinates()
     {
