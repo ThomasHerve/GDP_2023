@@ -23,10 +23,6 @@ public class Artefact : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        originalPosition = transform.position;
-        artefactUI = GameObject.FindGameObjectWithTag("ArtefactUI").GetComponent<ArtefactUI>();
-        gameLoop = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameLoop>();
-        artefactUI.Use();
     }
 
     // Update is called once per frame
@@ -41,6 +37,14 @@ public class Artefact : MonoBehaviour
 
     }
 
+    public void Up()
+    {
+        originalPosition = transform.position;
+        artefactUI = GameObject.FindGameObjectWithTag("ArtefactUI").GetComponent<ArtefactUI>();
+        gameLoop = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameLoop>();
+        artefactUI.Use();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         // CODE
@@ -48,6 +52,6 @@ public class Artefact : MonoBehaviour
         PlayerStats.gameManager.PlayGlobalSfx(gongClip);
         Debug.Log("Artefact");
         gameLoop.GetArtefact();
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

@@ -92,6 +92,7 @@ public class GameLoop : MonoBehaviour
                     {
                         Artefacts[index].SetActive(true);
                         Artefacts[index].GetComponent<Artefact>().restant = 2 - (nbUnlockedEnemyTypes - 2);
+                        Artefacts[index].GetComponent<Artefact>().Up();
                         spawnArtefact = false;
                         if(index < 2)
                             index++;
@@ -117,13 +118,13 @@ public class GameLoop : MonoBehaviour
                     {
                         if (timeInGame >= TIMETOBOSS)
                         {
-                            if(!spawnArtefact)
+                            if(2 - (nbUnlockedEnemyTypes - 2) > 0)
                             {
                                 // We lose
                                 EndGame(false);
                                 PlayerStats.hp = 0;
                                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().Die();
-                                time.text = "Vous n'avez pas collect� les artefacts � temps";
+                                time.text = "Vous n'avez pas collecté les artefacts à temps";
                                 time.color = Color.red;
                                 return;
                             }
@@ -185,11 +186,18 @@ public class GameLoop : MonoBehaviour
 
     public void StartGame()
     {
+        spawnArtefact = true;
+        foreach(GameObject g in Artefacts)
+        {
+            g.SetActive(false);
+        }
         PlayerStats.pause = false;
         startText.SetActive(false);
         state = State.START;
         initialEnemyWave = 4;
+        index = 0;
         nbUnlockedEnemyTypes = 0;
+        lastSpawn = FIRSTSPAWNTIME;
         bossUnlocked = false;
         time.text = numberOfSecondsToDisplayableString(TIMETOBOSS);
         time.color = new Color(0f, 1f, 0f, 0.1f);
@@ -245,7 +253,8 @@ public class GameLoop : MonoBehaviour
 
     public void GetArtefact()
     {
-        spawnArtefact = true;
+        if (2 - (nbUnlockedEnemyTypes - 2) > 0)
+            spawnArtefact = true;
     }
 
     private string numberOfSecondsToDisplayableString(float time)
