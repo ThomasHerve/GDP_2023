@@ -8,12 +8,12 @@ public static class PlayerStats
     //Player Consts  : To configure
     static public int NEXT_LEVEL_EXP { get { return level * level * 10; } }
     static public int SLOW_GRADIENT { get { return 2+bottleSlow/10; } }
-    public const int HPMAX_BASE = 10;
+    public const int HPMAX_BASE = 20;
     public const int RESISTANCE_BASE = 0;
-    public const int DAMAGE_BASE = 10;
+    public const int DAMAGE_BASE = 20;
     public const int THROWFORCE_BASE = 10;
     public const int BOTTLECD_BASE = 10;
-    public const int BOTTLEDAMAGE_BASE = 10;
+    public const int BOTTLEDAMAGE_BASE = 30;
     public const int BOTTLEDAMAGERADIUS_BASE = 3;
     public const int BOTTLESLOW_BASE = 0;
     public const int LIFESTEAL_BASE = 1;

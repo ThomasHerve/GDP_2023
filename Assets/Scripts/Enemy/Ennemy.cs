@@ -81,6 +81,7 @@ public class Ennemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (dead) return;
         if (PlayerStats.pause)
         {
             if (!pauseTriggered) {
@@ -190,7 +191,9 @@ public class Ennemy : MonoBehaviour
     {
         Vector3 knockbackDirection = transform.forward * -1f;
         GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
-
+        currentDamageTime = 0;
+        isCollided = false;
+        currentOutTime = outTime;
         hp -= dmg;
         if (hp < 0)
             Die();

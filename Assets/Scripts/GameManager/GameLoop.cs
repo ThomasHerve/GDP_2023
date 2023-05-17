@@ -10,7 +10,7 @@ public class GameLoop : MonoBehaviour
     PlayerController playerController;
     float FIRSTSPAWNTIME = 1;
     [SerializeField]
-    static float SPAWNTIME = 40;
+    static float SPAWNTIME = 30;
     static float SUB_SPAWNTIME = 5;
     [SerializeField]
     int maxEnemy = 50;

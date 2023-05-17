@@ -255,7 +255,7 @@ MonoBehaviour:
   effectSource: {fileID: 0}
   effectsClip: []
   effectCoolDown: 2
-  damageTime: 1
+  damageTime: 1.5
   isBoss: 0
 --- !u!195 &-3818584348792448819
 NavMeshAgent:
